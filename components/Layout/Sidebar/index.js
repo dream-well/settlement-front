@@ -1,71 +1,25 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import cn from 'classnames';
+import { selectMenuState } from "../../../store/slices/menuSlice";
+import { useSelector } from "react-redux";
 
-const menu = [
-    {
-        text: 'Dashboard',
-        href: '/dashboard',
-        icon: 'edit'
-    },
-    {
-        text: 'Sales',
-        href: '/sales',
-        icon: 'vertical_split'
-    },
-    {
-        text: 'Artists',
-        href: '/artists',
-        icon: 'brush'
-    },
-    {
-        text: 'Users',
-        href: '/users',
-        icon: 'person'
-    },
-    {
-        text: 'Genres',
-        href: '/genres',
-        icon: 'pets'
-    },
-    {
-        text: 'Projects',
-        href: '/projects',
-        icon: 'view_module'
-    },
-    {
-        text: 'Variants',
-        href: '/variants',
-        icon: 'emoji_objects'
-    },
-    {
-        text: 'Auctions',
-        href: '/auctions',
-        icon: 'water_drop'
-    },
-    {
-        text: 'Transactions',
-        href: '/transactions',
-        icon: 'table_chart'
-    },
-    {
-        text: 'Offers',
-        href: '/offers',
-        icon: 'keyboard_command_key'
-    },
-    
-]
 
-function Sidebar() {
+export default function Sidebar() {
 
     const router = useRouter();
 
+    const menuState = useSelector(selectMenuState);
+    
     return (
-        <div className='flex flex-col w-[242px] shadow-[0_2px_150px_0px_rgba(90,97,105,0.1)] z-10'>
+        <div className={cn('flex flex-col w-[242px] shadow-[0_2px_150px_0px_rgba(90,97,105,0.1)] z-10', menuState == 'hidden' && 'hidden')}>
             <nav className='h-[60px] w-full text-center leading-[60px] border-b border-[#e1e5eb] text-[#222] font-medium mb-[2px]'>
-                <div className='flex items-center    justify-center cursor-pointer'>
-                    <i className='material-icons'>music_note</i>
-                    <span className='ml-[4px]'>Metamusik Admin</span>
+                <div className='flex items-center justify-center cursor-pointer text-[20px]'>
+                    <i className='material-icons'>attach_money</i>
+                    <span className='ml-[4px]'>
+                        <span className='text-[#f39c2b]'>Digi</span>
+                        <span className='text-[#40496b]'>rupee</span>
+                    </span>
                 </div>
             </nav>
             <ul>
@@ -90,4 +44,41 @@ function Sidebar() {
     )
 }
 
-export default Sidebar;
+
+const menu = [
+    {
+        text: 'Deposits',
+        href: '/dashboard',
+        icon: 'money'
+    },
+    {
+        text: 'Withdrawals',
+        href: '/sales',
+        icon: 'contacts'
+    },
+    {
+        text: 'Swap',
+        href: '/artists',
+        icon: 'swap_horiz'
+    },
+    {
+        text: 'Rolling Reserve',
+        href: '/users',
+        icon: 'diamond'
+    },
+    {
+        text: 'Chargebacks',
+        href: '/genres',
+        icon: 'calendar_today'
+    },
+    {
+        text: 'Fee Structure',
+        href: '/projects',
+        icon: 'forum'
+    },
+    {
+        text: 'System Info',
+        href: '/variants',
+        icon: 'info'
+    },   
+]

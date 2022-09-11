@@ -10,7 +10,9 @@ import { setContext } from '@apollo/client/link/context';
 
 import { onError } from '@apollo/client/link/error'
 import Auth from '../components/Auth'
-import Head from 'next/head'
+import { store, wrapper } from "../store/store";
+import { Provider } from 'react-redux';
+
 
 const errorLink = onError(({ graphqlErrors, networkError }) => {
   if(graphqlErrors) {
@@ -43,17 +45,15 @@ const client = new ApolloClient({
   link: authLink.concat(link),
 })
 
-function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <Provider store={store}>
       <Auth>
         <ApolloProvider client={client}>
           <Component {...pageProps} />
         </ApolloProvider>
       </Auth>
-    </>
+    </Provider>
   )
     
 }
-
-export default MyApp
