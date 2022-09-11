@@ -10,9 +10,9 @@ export default function Sidebar() {
     const router = useRouter();
 
     const menuState = useSelector(selectMenuState);
-    
+
     return (
-        <div className={cn('flex flex-col w-[242px] shadow-[0_2px_150px_0px_rgba(90,97,105,0.1)] z-10', menuState == 'hidden' && 'hidden')}>
+        <div className={cn('flex flex-col w-[242px] shadow-[0_2px_150px_0px_rgba(90,97,105,0.1)] z-10 transition-all duration-500', menuState == 'hidden' && '-ml-[242px] opacity-0')}>
             <nav className='h-[60px] w-full text-center leading-[60px] border-b border-[#e1e5eb] text-[#222] font-medium mb-[2px]'>
                 <div className='flex items-center justify-center cursor-pointer text-[20px]'>
                     <i className='material-icons'>attach_money</i>
