@@ -8,6 +8,7 @@ export function getCellText(row, col) {
             case 'number':
                 return '';
         }
+        if(isNan(row[col.value])) return '';
         return row[col.value].toString();
     }
     if(typeof col.value == 'function') 

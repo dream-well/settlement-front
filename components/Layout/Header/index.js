@@ -1,10 +1,13 @@
+import { useWeb3React } from "@web3-react/core";
 import { useDispatch, useSelector } from "react-redux";
+import { truncateAddress } from "utils";
 import { selectMenuState, setMenuState } from "../../../store/slices/menuSlice";
 import Button from "../../Buttons/Button";
 
 function Header() {
 
     const menuState = useSelector(selectMenuState);
+    const { account, error } = useWeb3React();
     const dispatch = useDispatch();
 
     return (
@@ -13,7 +16,7 @@ function Header() {
                 <i className='material-icons'>menu</i>
             </button>
             <div className='flex-grow'></div>
-            <Button>Wallet Connected</Button>
+            <Button>{account ? truncateAddress(account, 3) : 'Connect Wallet' }</Button>
             <button className='ml-[12px]'>
                 <i className='material-icons'>dark_mode</i>
             </button>

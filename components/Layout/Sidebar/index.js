@@ -58,7 +58,7 @@ const menu = [
     },
     {
         text: 'Swap',
-        href: '/artists',
+        href: '/swap',
         icon: 'swap_horiz'
     },
     {

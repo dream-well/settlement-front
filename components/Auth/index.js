@@ -2,26 +2,20 @@ import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 import { useWeb3React } from '@web3-react/core';
 import WalletPopup from "../Popups/WalletPopup";
+import { InjectedConnector } from "@web3-react/injected-connector";
 
 const auth_pages = {
-    "/users": true,
-    "/admin": true,
-    '/dashboard': true,
-    '/sales': true,
-    '/artists': true,
-    '/users': true,
-    '/genres': true,
-    '/projects': true,
-    '/variants': true,
-    '/auctions': true,
-    '/transactions': true,
-    '/offers': true,
+    "/chargebacks": true,
     '/': true,
 }
 
+const metamask = new InjectedConnector({
+    supportedChainIds: [316]
+  });
+
 function Auth({children}) {
     const router = useRouter();
-    const { account, error } = useWeb3React();
+    const { activate, account, error, library } = useWeb3React();
     const [popupHidden, setPopupHidden] = useState(true);
 
     useEffect(() => {
@@ -29,8 +23,23 @@ function Auth({children}) {
 
         if(auth_pages[router.pathname]) {
             if(!account) {
-                // router.replace('/signin');
-                setPopupHidden(false);
+                console.log("error", error);
+                if(localStorage.getItem('account')) {
+                    activate(metamask, (e) => {
+                        localStorage.removeItem('account');
+                        setPopupHidden(false);
+                    }).then(() => {
+                        if(account)
+                            localStorage.setItem('account', account);
+                    })
+                }
+                else {
+                    setPopupHidden(false);
+                }
+            }
+            else {
+                localStorage.setItem('account', account)
+                setPopupHidden(true);
             }
         }
     }, [account, error])

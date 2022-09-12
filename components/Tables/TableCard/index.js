@@ -6,7 +6,7 @@ import { BeatLoader } from 'react-spinners';
 import { useState } from 'react';
 import { getCellText } from '../util';
 
-function TableCard({ total, perPage, title, rows=[], cols=[], isLoading=false, page, onPrev=()=>{}, onNext=()=>{} }) {
+function TableCard({ total, perPage, title, rows=[], cols=[], isLoading=false, page=0, onPrev=()=>{}, onNext=()=>{} }) {
     const maxPage = Math.ceil(total / perPage);
     const [searchText, setSearchText] = useState('');
     const filteredRows = filterRows(cols, rows, searchText);
