@@ -19,6 +19,17 @@ function Auth({children}) {
     const [popupHidden, setPopupHidden] = useState(true);
 
     useEffect(() => {
+        if(!library) return;
+        console.log('library', library.provider);
+        library.provider.on('accountsChanged', (accounts) => {
+            console.log('accounts', accounts);
+            if(accounts.length == 0) {
+                localStorage.removeItem('account');
+            }
+        })
+    }, [library])
+
+    useEffect(() => {
         console.warn("auth error", error);
 
         if(auth_pages[router.pathname]) {
