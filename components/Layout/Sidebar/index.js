@@ -48,7 +48,7 @@ export default function Sidebar() {
 const menu = [
     {
         text: 'Deposits',
-        href: '/dashboard',
+        href: '/deposits',
         icon: 'money'
     },
     {
@@ -68,7 +68,7 @@ const menu = [
     },
     {
         text: 'Chargebacks',
-        href: '/genres',
+        href: '/chargebacks',
         icon: 'calendar_today'
     },
     {
