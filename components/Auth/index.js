@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from 'next/router'
+import { useWeb3React } from '@web3-react/core';
 
 const auth_pages = {
     "/users": true,
@@ -19,17 +20,17 @@ const auth_pages = {
 
 function Auth({children}) {
     const router = useRouter();
+    const { account, error } = useWeb3React();
 
     useEffect(() => {
-        console.log(router.pathname);
+        console.warn("auth error", error);
+
         if(auth_pages[router.pathname]) {
-            const token = localStorage.getItem('token');
-            const expiresAt = localStorage.getItem('expiresAt');
-            if(!token || !expiresAt || new Date(expiresAt) < new Date()) {
-                router.replace('/signin');
+            if(!account) {
+                // router.replace('/signin');
             }
         }
-    }, [])
+    }, [account, error])
 
     return (<div>{children}</div>)
 }
