@@ -11,9 +11,18 @@ function TableCard( props ) {
     const [searchText, setSearchText] = useState('');
     return (
         <div className='bg-white rounded-[12px] shadow pb-[10px]'>
-            <div className='flex'>
-                <div className='font-medium text-[20px] p-[16px] flex-grow'>
-                    { props.title }
+            <div className='flex p-5'>
+                <div className='flex-grow'>
+                    Show &nbsp;&nbsp;&nbsp;
+                <select className='border h-[25px]' 
+                    onChange={(e) => props.onChangePerPage(e.target.value)} 
+                    value={props.perPage}
+                >
+                    <option value='10'>10</option>
+                    <option value='20'>20</option>
+                    <option value='100'>100</option>
+                </select>
+                    &nbsp;&nbsp;entries
                 </div>
                 <div className='px-4 flex items-center'>
                     <div>Search By:</div>
@@ -71,14 +80,6 @@ function TableCard( props ) {
                 { maxPage > 0 && <span className='mx-4'>{maxPage}</span> }
 
                 <button onClick={props.onNext}>next</button>
-                <select className='ml-6 border h-[25px]' 
-                    onChange={(e) => props.onChangePerPage(e.target.value)} 
-                    value={props.perPage}
-                >
-                    <option value='10'>10</option>
-                    <option value='20'>20</option>
-                    <option value='100'>100</option>
-                </select>
                 {props.total && <span className='mx-4'>total: {props.total}</span> }
             </div>
         </div>

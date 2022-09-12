@@ -78,7 +78,7 @@ const menu = [
     },
     {
         text: 'System Info',
-        href: '/variants',
+        href: '/systeminfo',
         icon: 'info'
     },   
 ]

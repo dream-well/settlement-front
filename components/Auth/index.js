@@ -2,19 +2,6 @@ import { useEffect } from "react";
 import { useRouter } from 'next/router'
 
 const auth_pages = {
-    "/users": true,
-    "/admin": true,
-    '/dashboard': true,
-    '/sales': true,
-    '/artists': true,
-    '/users': true,
-    '/genres': true,
-    '/projects': true,
-    '/variants': true,
-    '/auctions': true,
-    '/transactions': true,
-    '/offers': true,
-    '/': true,
 }
 
 function Auth({children}) {
