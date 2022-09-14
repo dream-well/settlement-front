@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import { useState } from 'react'
 
-export default function Button({ children, className, color='white', bgColor='#6362e7', fontSize=16, type='fill' }) {
+export default function Button({ children, className, color='white', bgColor='#6362e7', fontSize=16, type='fill', ...rest }) {
 
     const [isHover, setHover] = useState(false);
 
@@ -15,6 +15,7 @@ export default function Button({ children, className, color='white', bgColor='#6
                 borderColor: type == 'fill'? bgColor: color,
                 fontSize,
             }}
+            { ...rest }
         >
             {children}
         </button>

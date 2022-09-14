@@ -73,12 +73,12 @@ const menu = [
     },
     {
         text: 'Fee Structure',
-        href: '/projects',
+        href: '/fees',
         icon: 'forum'
     },
     {
         text: 'System Info',
-        href: '/variants',
+        href: '/systeminfo',
         icon: 'info'
     },   
 ]

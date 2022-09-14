@@ -6,8 +6,8 @@ import Image from "next/image"
 export default function Chargebacks() {
 
     return (
-        <Layout title="Chargebacks">
-            <TableCard title='Transactions' cols={cols} rows={rows}/>
+        <Layout title=" ">
+            <TableCard title='Chargebacks' cols={cols} rows={rows}/>
         </Layout>
     )
 }

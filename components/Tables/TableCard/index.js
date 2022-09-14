@@ -53,25 +53,28 @@ function TableCard({ total, perPage, title, rows=[], cols=[], isLoading=false, p
                     </div>
                 }
             </div>
-            <div className='py-4 px-4 w-full flex justify-center'>
-                <button onClick={onPrev}>prev</button>
-                <div className='w-[60px] outline-none border text-center px-2 mx-2'>                
-                    {page + 1}
-                </div>
-                { maxPage > 0 && '/' }
-                { maxPage > 0 && <span className='mx-4'>{maxPage}</span> }
+            {
+                total > perPage && 
+                    <div className='py-4 px-4 w-full flex justify-center'>
+                        <button onClick={onPrev}>prev</button>
+                        <div className='w-[60px] outline-none border text-center px-2 mx-2'>                
+                            {page + 1}
+                        </div>
+                        { maxPage > 0 && '/' }
+                        { maxPage > 0 && <span className='mx-4'>{maxPage}</span> }
 
-                <button onClick={onNext}>next</button>
-                <select className='ml-6 border h-[25px]' 
-                    onChange={(e) => onChangePerPage(e.target.value)} 
-                    value={perPage}
-                >
-                    <option value='10'>10</option>
-                    <option value='20'>20</option>
-                    <option value='100'>100</option>
-                </select>
-                {total && <span className='mx-4'>total: {total}</span> }
-            </div>
+                        <button onClick={onNext}>next</button>
+                        <select className='ml-6 border h-[25px]' 
+                            onChange={(e) => onChangePerPage(e.target.value)} 
+                            value={perPage}
+                        >
+                            <option value='10'>10</option>
+                            <option value='20'>20</option>
+                            <option value='100'>100</option>
+                        </select>
+                        {total && <span className='mx-4'>total: {total}</span> }
+                    </div>
+            }
         </div>
     )   
 }
