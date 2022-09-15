@@ -81,4 +81,9 @@ const menu = [
         href: '/systeminfo',
         icon: 'info'
     },   
+    {
+        text: 'Auto Settlements',
+        href: '/autosettlements',
+        icon: 'info'
+    },
 ]

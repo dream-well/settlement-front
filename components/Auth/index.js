@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from 'next/router'
 
 const auth_pages = {
+    "/": true
 }
 
 function Auth({children}) {
