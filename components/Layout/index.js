@@ -8,7 +8,7 @@ function Layout({children, title}) {
             <div className='flex flex-col w-full'>
                 <Header />
                 <div className='bg-[#f5f6f8] flex-grow px-4'>
-                    <h3 className='py-4 text-[25px]'>{title}</h3>
+                    <h3 className='py-4 text-[25px] font-bold text-[#1e2f65]'>{title}</h3>
                     {children}
                 </div>
             </div>

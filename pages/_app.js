@@ -12,7 +12,32 @@ import { onError } from '@apollo/client/link/error'
 import Auth from '../components/Auth'
 import { store, wrapper } from "../store/store";
 import { Provider } from 'react-redux';
+import { Web3ReactProvider } from '@web3-react/core'
+import { ethers } from "ethers";
 
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <Provider store={store}>
+      <Web3ReactProvider
+          getLibrary={getLibrary}
+        >
+        <Auth>
+          <ApolloProvider client={client}>
+            <Component {...pageProps} />
+          </ApolloProvider>
+        </Auth>
+      </Web3ReactProvider>
+    </Provider>
+  )
+    
+}
+
+
+const getLibrary = (provider) => {
+  const library = new ethers.providers.Web3Provider(provider);
+  library.pollingInterval = 8000; // frequency provider is polling
+  return library;
+};
 
 const errorLink = onError(({ graphqlErrors, networkError }) => {
   if(graphqlErrors) {
@@ -44,16 +69,3 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: authLink.concat(link),
 })
-
-export default function MyApp({ Component, pageProps }) {
-  return (
-    <Provider store={store}>
-      <Auth>
-        <ApolloProvider client={client}>
-          <Component {...pageProps} />
-        </ApolloProvider>
-      </Auth>
-    </Provider>
-  )
-    
-}

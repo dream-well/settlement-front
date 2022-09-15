@@ -1,13 +1,14 @@
 
 import cn from 'classnames'
+import { getCellText } from '../util'
 
-function Table( {cols, rows, className, isLoading} ) {
+function Table( {cols, rows, className} ) {
     return (
-        <table className={cn('border-grey border-t border-b', className)}>
+        <table className={cn('border-grey border-t border-b w-full', className)}>
             <thead>
                 <tr className='px-[20px]'>
                     {
-                        rows[0] != 'id' &&
+                        cols[0].type != 'id' &&
                         <th className='text-left py-[12px] pl-[20px] pr-[4px]'>
                             #
                         </th>
@@ -28,7 +29,7 @@ function Table( {cols, rows, className, isLoading} ) {
                     rows.map((row, key) => (
                         <tr key={key} className='border-grey border-t'>
                             {
-                                rows[0] != 'id' &&
+                                cols[0].type != 'id' &&
                                 <td className='text-left py-[12px] pl-[20px] pr-[4px]'>
                                     {key + 1}
                                 </td>
@@ -37,15 +38,7 @@ function Table( {cols, rows, className, isLoading} ) {
                                 cols.map((col, key) => (
                                     <td className='py-[12px] px-[4px]' key={key} >
                                         {
-                                            typeof col.value == 'string' 
-                                                ?
-                                                (
-                                                    typeof row[col.value] == 'object' && row[col.value]?.value?
-                                                        row[col.value].value :
-                                                        row[col.value]
-                                                )
-                                                :
-                                                col.value(row)
+                                            getCellText(row, col)
                                         }
                                     </td>
                                 ))
