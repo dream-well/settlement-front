@@ -64,7 +64,7 @@ export default function Variants() {
       </div>
 
       <div className="bg-white rounded-lg mt-5 mb-5">
-        <div className="text-[22px] font-[500] tracking-[0.5px] p-5">Fee Structure</div>
+        <div className="text-[22px] font-[500] tracking-[0.5px] p-5">System Info</div>
         <div className="p-5 pt-0">
           <TableCard
             rows={rows}

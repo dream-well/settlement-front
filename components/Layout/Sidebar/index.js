@@ -22,6 +22,11 @@ export default function Sidebar() {
                     </span>
                 </div>
             </nav>
+            <div className="py-6 px-4">
+                <div className="bg-[#e5f3cd] text-[#7dc006] text-center text-[11px] px-[20px] py-[10px] rounded-md">
+                    Merchant Status: Active
+                </div>
+            </div>
             <ul>
             {
                 menu.map(({text, href, icon}, key) => (
@@ -53,18 +58,13 @@ const menu = [
     },
     {
         text: 'Withdrawals',
-        href: '/sales',
+        href: '/withdrawals',
         icon: 'contacts'
     },
     {
         text: 'Swap',
         href: '/swap',
         icon: 'swap_horiz'
-    },
-    {
-        text: 'Rolling Reserve',
-        href: '/users',
-        icon: 'diamond'
     },
     {
         text: 'Chargebacks',
