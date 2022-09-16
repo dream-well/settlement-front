@@ -18,13 +18,8 @@ function Header() {
             <button onClick={() => { dispatch(setMenuState(menuState == 'hidden' ? 'show' : 'hidden'))}}>
                 <i className='material-icons'>menu</i>
             </button>
-            <div className='flex-grow'></div>
-            {/* <Button>{account ? truncateAddress(account, 3) : 'Connect Wallet' }</Button>
-            <button className='ml-[12px]'>
-                <i className='material-icons'>dark_mode</i>
-            </button> */}
             <Button className="bg-[#6362e7] text-[#fff] h-[40px] rounded-[5px] p-[8px]" onClick={() => { dispatch(setpopupSate(false)) }}>
-                    {account ? truncateAddress(account, 3) : 'Connect Wallet' }
+                {account ? truncateAddress(account, 3) : 'Connect Wallet' }
             </Button>
             <WalletPopup hidden={popupState} onClose={() => { dispatch(setpopupSate(true)) }}/>
         </div>
