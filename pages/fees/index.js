@@ -15,27 +15,27 @@ export default function Fees() {
 const cols = [
     { text: 'Items', value: 'item', type: 'id' },
     { text: 'Fee (%)', value: 'fee' },
+    { text: 'Limit', value: 'limit' },
 ]
 
 const rows = [
     {
         'item': 'Deposits Netbanking',
         'fee': '6%',
+        'limit': '100 INR - 100000 INR'
     },
     {
         'item': 'Deposits UPI',
         'fee': '5%',
+        'limit': '100 INR - 100000 INR'
     },
     {
         'item': 'Withdraw Bank Transfer',
         'fee': '2.5%',
     },
     {
-        'item': 'withdraw Crypto',
-        'fee': '1%',
-    },
-    {
-        'item': 'Rolling Reserve',
-        'fee': '5% (for 6 months)',
+        'item': 'Settlement',
+        'fee': 'Market Price',
+        'limit': 'Min 100000 INR'
     },
 ]

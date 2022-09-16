@@ -3,16 +3,16 @@ import { useRouter } from "next/router";
 import cn from 'classnames';
 import { selectMenuState } from "../../../store/slices/menuSlice";
 import { useSelector } from "react-redux";
-
+import { useState } from "react";
 
 export default function Sidebar() {
 
     const router = useRouter();
-
+    const [merchantStatus, setmerchantStatus] = useState(1);
     const menuState = useSelector(selectMenuState);
 
     return (
-        <div className={cn('flex flex-col w-[242px] shadow-[0_2px_150px_0px_rgba(90,97,105,0.1)] z-10 transition-all duration-500', menuState == 'hidden' && '-ml-[242px] opacity-0')}>
+        <div className={cn('flex flex-col w-[350px] shadow-[0_2px_150px_0px_rgba(90,97,105,0.1)] z-10 transition-all duration-500', menuState == 'hidden' && '-ml-[242px] opacity-0')}>
             <nav className='h-[60px] w-full text-center leading-[60px] border-b border-[#e1e5eb] text-[#222] font-medium mb-[2px]'>
                 <div className='flex items-center cursor-pointer text-[20px] ml-[26px]'>
                     <i className='material-icons'>attach_money</i>
@@ -23,8 +23,8 @@ export default function Sidebar() {
                 </div>
             </nav>
             <div className="py-6 px-4">
-                <div className="bg-[#e5f3cd] text-[#7dc006] text-center text-[11px] px-[20px] py-[10px] rounded-md">
-                    Merchant Status: Active
+                <div className={cn("text-center text-[11px] px-[20px] py-[10px] rounded-md", merchantStatus && "bg-[#e5f3cd] text-[#7dc006]", merchantStatus || "bg-[#fad4d4] text-[#e82c5d]")}>
+                    Merchant Status: { merchantStatus ? "Active" : "Inactive" }
                 </div>
             </div>
             <ul>
@@ -62,7 +62,12 @@ const menu = [
         icon: 'contacts'
     },
     {
-        text: 'Swap',
+        text: 'Settlements',
+        href: '/settlements',
+        icon: 'payments'
+    },
+    {
+        text: 'Swap To BUSD (BSC)',
         href: '/swap',
         icon: 'swap_horiz'
     },
@@ -72,7 +77,7 @@ const menu = [
         icon: 'calendar_today'
     },
     {
-        text: 'Fee Structure',
+        text: 'Fee',
         href: '/fees',
         icon: 'forum'
     },
@@ -82,8 +87,8 @@ const menu = [
         icon: 'info'
     },   
     {
-        text: 'Auto Settlements',
+        text: 'Auto Settlements (BSC)',
         href: '/autosettlements',
-        icon: 'info'
+        icon: 'create'
     },
 ]

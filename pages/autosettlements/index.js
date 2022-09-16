@@ -1,3 +1,4 @@
+import { TextField } from "@mui/material"
 import Button from "components/Buttons/Button"
 import Layout from "components/Layout"
 import TableCard from "components/Tables/TableCard"
@@ -12,7 +13,7 @@ export default function AutoSettlements() {
                         <span className="text-[22px] font-medium">Set Settlement Limit</span>
                     </div>
                     <div className="flex my-6">
-                        <input placeholder="Enter Amount"></input>
+                        <TextField id="outlined-basic" variant="outlined" size="small"/>
                         <Button type="fill" className="ml-4">Submit</Button>
                     </div>
                     <div className="text-[#FFCC92] text-[13px] font-medium">

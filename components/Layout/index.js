@@ -8,8 +8,15 @@ function Layout({children, title}) {
             <Sidebar />
             <div className='flex flex-col w-full'>
                 <Header />
-                <div className='bg-[#f5f6f8] flex-grow px-4'>
-                    <h3 className='py-4 text-[25px] font-bold text-[#1e2f65]'>{title}</h3>
+                <div className='bg-[#f5f6f8] flex-grow px-4 mt-4'>
+                    <div className="flex justify-between">
+                        <h3 className='py-4 text-[25px] font-bold text-[#1e2f65]'>{title}</h3>
+                        <div className="flex items-end">
+                            <span className="font-medium text-[12px]">Maintenance Mode:</span>
+                            <span className="bg-[#dceacb] text-[#b5c918] text-[10px] rounded-sm mx-1 px-1">Yes</span>
+                            <span className="bg-[#fad4d4] text-[#e82c5d] text-[10px] rounded-sm mx-1 px-1">No</span>
+                        </div>
+                    </div>
                     {children}
                     <Footer/>
                 </div>
