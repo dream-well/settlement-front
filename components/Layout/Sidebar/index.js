@@ -77,7 +77,7 @@ const menu = [
         icon: 'calendar_today'
     },
     {
-        text: 'Fee',
+        text: 'Fees',
         href: '/fees',
         icon: 'forum'
     },
