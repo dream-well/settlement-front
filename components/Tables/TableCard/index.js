@@ -20,8 +20,24 @@ function TableCard({ title, rows=[], cols=[], isLoading=false}) {
     return (
         <div className='bg-white rounded-[12px] shadow pb-[10px] px-6'>
             <div className='flex'>
-                <div className='font-medium text-[20px] py-[16px] flex-grow'>
+                <div className='font-medium text-[22px] py-[16px] flex-grow'>
                     { title }
+                </div>
+            </div>
+            <div className='flex justify-between mt-5'>
+                <div className='flex'>
+                    show 
+                    <select
+                        className='ml-6 border h-[25px]' 
+                        onChange={(e) => setPerPage(e.target.value)} 
+                        value={perPage}
+                    >
+                        <option value='5'>5</option>
+                        <option value='10'>10</option>
+                        <option value='20'>20</option>
+                        <option value='100'>100</option>
+                    </select>
+                    &nbsp;&nbsp;&nbsp;entries
                 </div>
                 <div className='px-4 flex items-center'>
                     <div>Search:</div>
@@ -37,7 +53,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false}) {
                     />
                 </div>
             </div>
-            <div className='min-h-[523px] w-full relative'>
+            <div className='min-h-[523px] w-full relative mt-5'>
                 <Table cols={cols} rows={filteredRows} />
                 {
                     isLoading && 
@@ -62,25 +78,17 @@ function TableCard({ title, rows=[], cols=[], isLoading=false}) {
             </div>
             {
                 total > 0 && 
-                    <div className='py-4 px-4 w-full flex justify-center'>
-                        <button onClick={onPrev}>prev</button>
-                        <div className='w-[60px] outline-none border text-center px-2 mx-2'>                
-                            {page + 1}
+                    <div className='py-4 px-4 w-full flex justify-between'>
+                        {total && <span className='mx-4'>Total: {total}</span> }
+                        <div className='flex'>
+                            <button onClick={onPrev}>Previous</button>
+                            <div className='w-[60px] outline-none border text-center px-2 mx-2'>                
+                                {page + 1}
+                            </div>
+                            { maxPage > 0 && '/' }
+                            { maxPage > 0 && <span className='mx-4'>{maxPage}</span> }
+                            <button onClick={onNext}>Next</button>
                         </div>
-                        { maxPage > 0 && '/' }
-                        { maxPage > 0 && <span className='mx-4'>{maxPage}</span> }
-
-                        <button onClick={onNext}>next</button>
-                        <select className='ml-6 border h-[25px]' 
-                            onChange={(e) => setPerPage(e.target.value)} 
-                            value={perPage}
-                        >
-                            <option value='5'>5</option>
-                            <option value='10'>10</option>
-                            <option value='20'>20</option>
-                            <option value='100'>100</option>
-                        </select>
-                        {total && <span className='mx-4'>total: {total}</span> }
                     </div>
             }
         </div>
