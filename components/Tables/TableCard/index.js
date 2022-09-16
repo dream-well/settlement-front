@@ -5,11 +5,18 @@ import Image from 'next/image';
 import { BeatLoader } from 'react-spinners';
 import { useState } from 'react';
 import { getCellText } from '../util';
+import { renderToString } from 'react-dom/server';
 
-function TableCard({ total, perPage, title, rows=[], cols=[], isLoading=false, page=0, onPrev=()=>{}, onNext=()=>{} }) {
-    const maxPage = Math.ceil(total / perPage);
+function TableCard({ title, rows=[], cols=[], isLoading=false}) {
     const [searchText, setSearchText] = useState('');
-    const filteredRows = filterRows(cols, rows, searchText);
+    let filteredRows = filterRows(cols, rows, searchText);
+    const [page, setPage] = useState(0);
+    const [perPage, setPerPage] = useState(5);
+    const total = filteredRows.length;
+    filteredRows = filteredRows.slice(page * perPage, page * perPage + perPage);
+    const maxPage = Math.ceil(total / perPage);
+    const onPrev = () => { setPage(Math.max(0, page - 1)) };
+    const onNext=()=>{ setPage(Math.min(maxPage-1, page+1))};
     return (
         <div className='bg-white rounded-[12px] shadow pb-[10px] px-6'>
             <div className='flex'>
@@ -54,7 +61,7 @@ function TableCard({ total, perPage, title, rows=[], cols=[], isLoading=false, p
                 }
             </div>
             {
-                total > perPage && 
+                total > 0 && 
                     <div className='py-4 px-4 w-full flex justify-center'>
                         <button onClick={onPrev}>prev</button>
                         <div className='w-[60px] outline-none border text-center px-2 mx-2'>                
@@ -65,9 +72,10 @@ function TableCard({ total, perPage, title, rows=[], cols=[], isLoading=false, p
 
                         <button onClick={onNext}>next</button>
                         <select className='ml-6 border h-[25px]' 
-                            onChange={(e) => onChangePerPage(e.target.value)} 
+                            onChange={(e) => setPerPage(e.target.value)} 
                             value={perPage}
                         >
+                            <option value='5'>5</option>
                             <option value='10'>10</option>
                             <option value='20'>20</option>
                             <option value='100'>100</option>
@@ -84,7 +92,12 @@ function filterRows(cols, rows, searchText) {
     for(let row of rows) {
         for(let col of cols) {
             const value = getCellText(row, col);
-            if(value.indexOf(searchText) >= 0) {
+
+            if(typeof value == 'string' && value.indexOf(searchText) >= 0) {
+                filteredRows.push(row);
+                break;
+            }
+            if(typeof value == 'object' && renderToString(value).indexOf(searchText) >= 0) {
                 filteredRows.push(row);
                 break;
             }

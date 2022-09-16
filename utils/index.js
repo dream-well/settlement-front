@@ -6,3 +6,4 @@ export const truncateAddress = (address, dots = 6) => {
     if (!match) return address;
     return `${match[1]}${' .'.repeat(dots)} ${match[2]}`;
 };
+
