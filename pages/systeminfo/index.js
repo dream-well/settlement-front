@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Layout from "../../components/Layout"
-import { useEffect, useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useState } from "react";
 import TableCard from "../../components/Tables/TableCard";
 
 export default function Variants() {

@@ -1,5 +1,6 @@
 import Button from "components/Buttons/Button"
 import Layout from "components/Layout"
+import SearchPanel from "components/SearchPanel"
 import Image from "next/image"
 
 export default function Deposits() {
@@ -20,6 +21,7 @@ export default function Deposits() {
                     <Image src='/images/dollar.svg' width='48px' height='48px'/>
                 </div>
             </div>
+            <SearchPanel />
         </Layout>
     )
 }
