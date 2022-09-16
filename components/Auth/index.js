@@ -7,6 +7,7 @@ import { InjectedConnector } from "@web3-react/injected-connector";
 const auth_pages = {
     "/chargebacks": true,
     "/systeminfo": true,
+    "/withdrawals": true,
     "/swap": true,
     '/': true,
 }

@@ -1,11 +1,12 @@
 import Button from "components/Buttons/Button"
 import Layout from "components/Layout"
+import SearchPanel from "components/SearchPanel"
 import Image from "next/image"
 
 export default function Deposits() {
 
     return (
-        <Layout title="Deposit">
+        <Layout title="Deposits">
             <div className='flex px-8 py-6 bg-white rounded-[8px] w-[320px] shadow-lg'>
                 <div className='flex flex-col'>
                     <label className='text-[14px]'>Deposit Wallet Balance:</label>
@@ -15,11 +16,12 @@ export default function Deposits() {
                             Swap to BUSD
                         </Button>
                     </div>
-                </div>                
+                </div>
                 <div className='flex justify-center items-center flex-grow'>
                     <Image src='/images/dollar.svg' width='48px' height='48px'/>
                 </div>
             </div>
+            <SearchPanel />
         </Layout>
     )
 }
