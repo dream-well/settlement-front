@@ -52,8 +52,8 @@ export default function Sidebar() {
 
 const menu = [
     {
-        text: 'Dashborad',
-        href: '/deposits',
+        text: 'Dashboard',
+        href: '/dashboard',
         icon: 'groups'
     },
     {
