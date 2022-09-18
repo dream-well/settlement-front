@@ -6,8 +6,9 @@ import { BeatLoader } from 'react-spinners';
 import { useState } from 'react';
 import { getCellText } from '../util';
 import { renderToString } from 'react-dom/server';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
-function TableCard({ title, rows=[], cols=[], isLoading=false}) {
+function TableCard({ title, rows=[], cols=[], isLoading=false, combotype=false}) {
     const [searchText, setSearchText] = useState('');
     let filteredRows = filterRows(cols, rows, searchText);
     const [page, setPage] = useState(0);
@@ -17,12 +18,36 @@ function TableCard({ title, rows=[], cols=[], isLoading=false}) {
     const maxPage = Math.ceil(total / perPage);
     const onPrev = () => { setPage(Math.max(0, page - 1)) };
     const onNext=()=>{ setPage(Math.min(maxPage-1, page+1))};
+    const [month, setmonth] = useState(1);
     return (
         <div className='bg-white rounded-[12px] shadow pb-[10px] px-6'>
             <div className='flex'>
                 <div className='font-medium text-[22px] py-[16px] flex-grow'>
                     { title }
                 </div>
+                {
+                    combotype && 
+                    <div className='flex justify-center items-center'>
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">select</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={month}
+                                label="select"
+                                size="small"
+                                onChange={(e) => setmonth(e.target.value)}
+                            >
+                            <MenuItem value={1}>Current Month</MenuItem>
+                            <MenuItem value={2}>Today</MenuItem>
+                            <MenuItem value={3}>Yesterday</MenuItem>
+                            <MenuItem value={4}>August 2022</MenuItem>
+                            <MenuItem value={5}>July 2022</MenuItem>
+                            <MenuItem value={6}>une 2022</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+                }
             </div>
             <div className='flex justify-between mt-5'>
                 <div className='flex'>
