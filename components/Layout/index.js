@@ -15,7 +15,7 @@ function Layout({children, title}) {
                     <div className="min-h-full">
                         <div className="flex justify-between">
                             <h3 className='py-4 text-[25px] font-bold text-[#1e2f65]'>{title}</h3>
-                            <div className="flex items-end">
+                            <div className="flex items-center py-4">
                                 <span className="font-medium text-[12px]">Maintenance Mode:</span>
                                 {
                                     maintenanceState ?

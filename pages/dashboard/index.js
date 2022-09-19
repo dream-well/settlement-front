@@ -24,7 +24,7 @@ const cols = [
     { text: 'Settlements', value: row => 
         <div>
             <span className="text-[#3a7bfd] font-bold">Pending: </span>
-            <span className="text-[#3a7bfd]">{row.settlements_pending}</span>, 
+            <span className="text-[#3a7bfd]">{row.settlements_pending}</span>,&nbsp;
             <span className="text-[#ffc107] font-bold">Settled: </span>
             <span className="text-[#ffc107]">{row.settlements_settled}</span>
         </div>
@@ -32,7 +32,7 @@ const cols = [
     { text: 'Rolling Reserve', value: row => 
         <div>
             <span className="text-[#3a7bfd] font-bold">Total: </span>
-            <span className="text-[#3a7bfd]">{row.rollingreserve_total}</span>, 
+            <span className="text-[#3a7bfd]">{row.rollingreserve_total}</span>,&nbsp;
             <span className="text-[#ffc107] font-bold">Released: </span>
             <span className="text-[#ffc107]">{row.rollingreserve_released}</span>
         </div>
