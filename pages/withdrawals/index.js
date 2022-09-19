@@ -7,10 +7,6 @@ import Chip from 'components/Chips/Chip'
 
 
 export default function Deposits() {
-    const [page, setPage] = useState(0);
-    const [perPage, setPerPage] = useState(3);
-    const [{searchBy, searchText}, setFilter] = useState({});
-
     return (
         <Layout title="Withdrawals">
             <SearchPanel />
@@ -20,8 +16,6 @@ export default function Deposits() {
                     cols={cols}
                     rows={rows}
                     className="w-full"
-                    page={page}
-                    perPage={perPage}
                     />
             </div>
         </Layout>
@@ -44,20 +38,15 @@ const cols = [
         </div>
     },
     { text: 'Amount', value: row => row.amount.toLocaleString()},
-    { text: 'Rolling Reserve', value: row => 
-        <div className='flex items-center'>
-            <p className='mr-2'>{row.rollingReserve}</p>
-            <Chip label={row.rollingReserveStatus} color={colors[row.rollingReserveStatus]} />
-        </div>
-    },
+    { text: 'Remarks', value: 'remarks' },
     { text: 'Fees', value: row => row.fees + ' %'},
     { text: 'Amt to Settle', value: row => row.amountToSettle.toLocaleString()},
     { text: 'Status', value: row => 
         <div>
-            <Chip label={row.status} color={colors[row.status]} />
+            <Chip label={row.status} color={colors[row.status]} className='capitalize'/>
         </div>
     },     
-
+    { text: 'AC Details', value: 'acDetails' },
 ]
 
 const colors = {
@@ -79,11 +68,11 @@ const rows = [
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        rollingReserve: 500,
-        rollingReserveStatus: 'harvested',
+        remarks: "remarks",
         fees: 5,
         amountToSettle: 10000,
         status: "success",
+        acDetails: "Selvanthegod icicci20124 465464564646879846",
     },
     {
         orderId: "1234564",
@@ -91,11 +80,11 @@ const rows = [
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        rollingReserve: 500,
-        rollingReserveStatus: 'harvested',
+        remarks: "remarks",
         fees: 5,
         amountToSettle: 10000,
-        status: "initiated",
+        status: "pending",
+        acDetails: "Selvanthegod icicci20124 465464564646879846",
     },
     {
         orderId: "1234564",
@@ -103,11 +92,11 @@ const rows = [
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        rollingReserve: 500,
-        rollingReserveStatus: 'ready_to_harvest',
+        remarks: "remarks",
         fees: 5,
         amountToSettle: 10000,
         status: "expired",
+        acDetails: "Selvanthegod icicci20124 465464564646879846",
     },
     {
         orderId: "1234564",
@@ -115,11 +104,11 @@ const rows = [
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        rollingReserve: 500,
-        rollingReserveStatus: 'pending',
+        remarks: "remarks",
         fees: 5,
         amountToSettle: 10000,
-        status: "chargebacked",
+        status: "error",
+        acDetails: "Selvanthegod icicci20124 465464564646879846",
     },
     {
         orderId: "1234564",
@@ -127,11 +116,11 @@ const rows = [
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        rollingReserve: 500,
-        rollingReserveStatus: 'harvested',
+        remarks: "remarks",
         fees: 5,
         amountToSettle: 10000,
-        status: "expired",
+        status: "pending",
+        acDetails: "Selvanthegod icicci20124 465464564646879846",
     },
     {
         orderId: "1234564",
@@ -139,11 +128,11 @@ const rows = [
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        rollingReserve: 500,
-        rollingReserveStatus: 'harvested',
+        remarks: "remarks",
         fees: 5,
         amountToSettle: 10000,
-        status: "success",
+        status: "pending",
+        acDetails: "Selvanthegod icicci20124 465464564646879846",
     },
     
 ]
