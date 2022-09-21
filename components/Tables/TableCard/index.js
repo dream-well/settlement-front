@@ -22,7 +22,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, combotype=false})
     return (
         <div className='bg-white rounded-[12px] shadow pb-[10px] px-6'>
             <div className='flex'>
-                <div className='font-medium text-[22px] py-[16px] flex-grow'>
+                <div className='font-medium text-[22px] py-7 flex-grow'>
                     { title }
                 </div>
                 {
@@ -53,7 +53,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, combotype=false})
                 <div className='flex'>
                     show 
                     <select
-                        className='ml-6 border h-[25px]' 
+                        className='ml-6 border h-[25px] pl-2' 
                         onChange={(e) => setPerPage(e.target.value)} 
                         value={perPage}
                     >
