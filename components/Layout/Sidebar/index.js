@@ -52,6 +52,11 @@ export default function Sidebar() {
 
 const menu = [
     {
+        text: 'Signature',
+        href: '/signature',
+        icon: 'assignment'
+    },
+    {
         text: 'Dashboard',
         href: '/dashboard',
         icon: 'groups'
