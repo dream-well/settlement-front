@@ -17,7 +17,7 @@ export default function Signature() {
 
     const { activate, account, error, library } = useWeb3React();
     const [data, setData] = useState(infos);
-    const [signature, setSignature] = useState('0xdebee514566e9afac8da0066eee83447f47003a4ae9f2c0295bcede8715448467430a7cde373b994b65092ea4b79f86b76646e5bbea9f71893a4167df2b22c891b');
+    const [signature, setSignature] = useState('signature here');
 
     const onTypeChange = (i, type) => {
         if(type == 'delete') 
