@@ -7,9 +7,9 @@ import { selectmaintenanceState } from "store/slices/maintenanceSlice";
 function Layout({children, title}) {
     const maintenanceState = useSelector(selectmaintenanceState);
     return (
-        <div className='flex w-full'>
+        <div className='flex min-h-screen w-full'>
             <Sidebar />
-            <div className='flex flex-col w-full min-h-screen'> 
+            <div className='flex flex-col w-full'>
                 <Header />
                 <div className='bg-[#f5f6f8] flex-grow px-4'>
                     <div className="min-h-full">
@@ -24,8 +24,8 @@ function Layout({children, title}) {
                                 }
                             </div>
                         </div>
+                        {children}
                     </div>
-                    {children}
                     <Footer/>
                 </div>
             </div>

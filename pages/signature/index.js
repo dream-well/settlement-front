@@ -77,7 +77,7 @@ export default function Signature() {
                                         <MenuItem value={'delete'}>delete</MenuItem>
                                     }
                                 </Select>
-                                <TextField fullWidth label={description} defaultValue={value} variant="standard"
+                                <TextField fullWidth label={description} variant="standard"
                                     value={value}
                                     onChange={e => onValueChange(key, e.target.value)}
                                 />
@@ -91,8 +91,8 @@ export default function Signature() {
                     onClick={copy2Clipboard}
                 >
                     {
-                        data.slice(2).map(({type, value}) => (
-                            <div>{type == 'hash' ? 'bytes32' : type}: {type == 'hash' ? web3.utils.keccak256(value) : value}</div>
+                        data.slice(2).map(({type, value}, key) => (
+                            <div key={key}>{type == 'hash' ? 'bytes32' : type}: {type == 'hash' ? web3.utils.keccak256(value) : value}</div>
                         ))
                     }
 

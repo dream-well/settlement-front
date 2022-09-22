@@ -5,6 +5,7 @@ import WalletPopup from "../Popups/WalletPopup";
 import { InjectedConnector } from "@web3-react/injected-connector";
 
 const auth_pages = {
+    "/signature": true,
     "/chargebacks": true,
     "/systeminfo": true,
     "/withdrawals": true,
