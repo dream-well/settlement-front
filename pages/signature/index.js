@@ -60,13 +60,14 @@ export default function Signature() {
     return (
         <Layout title="Generate a signature">
             <div className='w-full flex items-top justify-evenly'>
-                <div className='pt-8 w-[480px] rounded-[12px] bg-white px-[32px] mt-[40px] pt-[12px] pb-[12px] shadow-lg'>
+                <div className='pt-8 w-[480px] rounded-[12px] bg-white px-[32px] mt-[40px] pb-[12px] shadow-lg'>
                     {
                         data.map(({type, description, value}, key) => (
                             <div className='flex justify-between mb-[24px] items-center' key={key}>
                                 <Select
                                     value={type}
                                     onChange={e => onTypeChange(key, e.target.value)}
+                                    className='mr-4'
                                 >
                                     <MenuItem value={'uint256'}>uint256</MenuItem>
                                     <MenuItem value={'hash'}>hash</MenuItem>
@@ -76,7 +77,7 @@ export default function Signature() {
                                         <MenuItem value={'delete'}>delete</MenuItem>
                                     }
                                 </Select>
-                                <TextField className='ml-4' fullWidth label={description} defaultValue={value} variant="standard"
+                                <TextField fullWidth label={description} defaultValue={value} variant="standard"
                                     value={value}
                                     onChange={e => onValueChange(key, e.target.value)}
                                 />
@@ -86,7 +87,7 @@ export default function Signature() {
                     <IconButton size='large' color='primary' onClick={addRow} ><AddCircleIcon /></IconButton>
                     <Button color='primary' variant='outlined' onClick={generateSignature}>Generate</Button>
                 </div>
-                <div className='pt-8 w-[480px] rounded-[12px] bg-white px-[32px] mt-[40px] pt-[12px] pb-[12px] shadow-lg break-all	cursor-pointer'
+                <div className='pt-8 w-[480px] rounded-[12px] bg-white px-[32px] mt-[40px] pb-[12px] shadow-lg break-all	cursor-pointer'
                     onClick={copy2Clipboard}
                 >
                     {
