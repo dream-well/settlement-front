@@ -16,7 +16,7 @@ export default function WalletPopup({ className, hidden, onClose }) {
     
     const [isConnecting, setConnecting] = useState(-1);
 
-    const connect_wallet = async (key) => {
+    const connect_wallet = async (e, key) => {
         console.log('connect wallet');
         setConnecting(key);
         await activate(metamask, async (error) => {
@@ -25,6 +25,7 @@ export default function WalletPopup({ className, hidden, onClose }) {
               
             }
           });
+        setConnecting(-1);
     }
 
     useEffect(() => {
@@ -36,7 +37,7 @@ export default function WalletPopup({ className, hidden, onClose }) {
             {
                 wallets.map(({title, description, image}, key) => (
                     <div className='flex flex-col items-center border rounded-[8px] px-[12px] py-[20px] hover:bg-[#eee] mb-[20px] cursor-pointer select-none relative'
-                        onClick={connect_wallet}
+                        onClick={e => connect_wallet(e, key)}
                         key={key}
                     >
                         <Image width='50px' height='50px' src={image} />
