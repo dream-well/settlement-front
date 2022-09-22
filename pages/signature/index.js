@@ -70,6 +70,7 @@ export default function Signature() {
                                     className='mr-4'
                                 >
                                     <MenuItem value={'uint256'}>uint256</MenuItem>
+                                    <MenuItem value={'address'}>address</MenuItem>
                                     <MenuItem value={'hash'}>hash</MenuItem>
                                     <MenuItem value={'bytes32'}>bytes32</MenuItem>
                                     {
