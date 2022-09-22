@@ -6,6 +6,8 @@ import { MetaMask } from "@web3-react/metamask";
 import cn from 'classnames'
 import { useEffect, useState } from "react";
 import { PuffLoader } from "react-spinners";
+import { useDispatch, useSelector } from "react-redux";
+import { selectpopupSate, setpopupSate } from "store/slices/popupSlice"
 
 const metamask = new InjectedConnector({
     supportedChainIds: [316]
@@ -15,8 +17,10 @@ export default function WalletPopup({ className, hidden, onClose }) {
     const { library, account, activate, setError } = useWeb3React();
     
     const [isConnecting, setConnecting] = useState(-1);
+    const dispatch = useDispatch();
+    const popupState = useSelector(selectpopupSate);
 
-    const connect_wallet = async (key) => {
+    const connect_wallet = async (e, key) => {
         console.log('connect wallet');
         setConnecting(key);
         await activate(metamask, async (error) => {
@@ -25,6 +29,8 @@ export default function WalletPopup({ className, hidden, onClose }) {
               
             }
           });
+        setConnecting(-1);
+        dispatch(setpopupSate(true));
     }
 
     useEffect(() => {
@@ -36,7 +42,7 @@ export default function WalletPopup({ className, hidden, onClose }) {
             {
                 wallets.map(({title, description, image}, key) => (
                     <div className='flex flex-col items-center border rounded-[8px] px-[12px] py-[20px] hover:bg-[#eee] mb-[20px] cursor-pointer select-none relative'
-                        onClick={connect_wallet}
+                        onClick={e => connect_wallet(e, key)}
                         key={key}
                     >
                         <Image width='50px' height='50px' src={image} />

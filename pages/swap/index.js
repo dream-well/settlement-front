@@ -4,8 +4,8 @@ import Layout from "components/Layout"
 export default function Swap() {
 
     return (
-        <Layout title="Exchange">
-            <div className="flex justify-center items-center">
+        <Layout title="">
+            <div className="flex justify-center items-center flex-grow">
                 <div className='flex flex-col px-[30px] pt-[30px] pb-[20px] w-[400px] bg-white rounded-[12px] shadow-lg'>
                     <div className='flex justify-between'>
                         <Button>Swap</Button>
