@@ -71,6 +71,7 @@ export default function Signature() {
                                 >
                                     <MenuItem value={'uint256'}>uint256</MenuItem>
                                     <MenuItem value={'address'}>address</MenuItem>
+                                    <MenuItem value={'string'}>string</MenuItem>
                                     <MenuItem value={'hash'}>hash</MenuItem>
                                     <MenuItem value={'bytes32'}>bytes32</MenuItem>
                                     {
