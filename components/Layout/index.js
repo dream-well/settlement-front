@@ -9,12 +9,12 @@ function Layout({children, title}) {
     return (
         <div className='flex min-h-screen w-full'>
             <Sidebar />
-            <div className='flex flex-col w-full'>
+            <div className='flex flex-col w-full bg-[#f5f6f8] '>
                 <Header />
-                <div className='bg-[#f5f6f8] flex-grow px-4'>
+                <div className='flex-grow px-4'>
                     <div className="min-h-full">
                         <div className="flex justify-between">
-                            <h3 className='py-8 pl-8 text-[25px] font-bold text-[#1e2f65]'>{title}</h3>
+                            <h3 className='py-8 pl-2 text-[25px] font-bold text-[#1e2f65]'>{title}</h3>
                             <div className="flex items-center">
                                 <span className="font-medium text-[12px]">Maintenance Mode:</span>
                                 {
@@ -26,8 +26,8 @@ function Layout({children, title}) {
                         </div>
                         {children}
                     </div>
-                    <Footer/>
                 </div>
+                <Footer/>
             </div>
         </div>
     )

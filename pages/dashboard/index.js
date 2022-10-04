@@ -1,25 +1,42 @@
 import Layout from "components/Layout"
-import TableCard from "components/Tables/TableCard"
-
+import Table from "components/Tables/Table"
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 export default function Settlements() {
 
     return (
         <Layout title="DashBoard">
-            <div className="w-full mt-6">
-                <TableCard
-                    title='Current Month'
-                    cols={cols}
-                    rows={rows}
-                    className="w-full"
-                    combotype={true}
-                    />
+            <div className="w-full">
+                <div className='bg-white rounded-[12px] shadow pb-[10px] px-6 pt-6 pb-10'>
+                    <FormControl>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={2}
+                            size="small"
+                            onChange={(e) => setmonth(e.target.value)}
+                        >
+                        <MenuItem value={1}>Current Month</MenuItem>
+                        <MenuItem value={2}>Today</MenuItem>
+                        <MenuItem value={3}>Yesterday</MenuItem>
+                        <MenuItem value={4}>August 2022</MenuItem>
+                        <MenuItem value={5}>July 2022</MenuItem>
+                        <MenuItem value={6}>June 2022</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <Table
+                        className='mt-6'
+                        title='Current Month'
+                        cols={cols}
+                        rows={rows}
+                        />
+                </div>
             </div>
         </Layout>
     )
 }
 const cols = [
-    { text: 'Deposits', value: 'deposits'},
+    { text: 'Deposits', value: 'deposits', type:'id'},
     { text: 'Cashouts', value: 'cashouts'},
     { text: 'Settlements', value: row => 
         <div>

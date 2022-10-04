@@ -14,7 +14,7 @@ function Header() {
     const popupState = useSelector(selectpopupSate);
 
     return (
-        <div className='w-full flex items-center justify-between bg-white h-[60px] shadow-[0_2px_10px_0px_rgba(90,97,105,0.12)] px-4'>
+        <div className='w-full flex items-center justify-between bg-white h-[60px] px-4'>
             <button onClick={() => { dispatch(setMenuState(menuState == 'hidden' ? 'show' : 'hidden'))}}>
                 <i className='material-icons'>menu</i>
             </button>

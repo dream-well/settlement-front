@@ -57,6 +57,11 @@ const menu = [
         icon: 'assignment'
     },
     {
+        text: 'Interface',
+        href: '/interface',
+        icon: 'call_to_action'
+    },
+    {
         text: 'Dashboard',
         href: '/dashboard',
         icon: 'groups'
