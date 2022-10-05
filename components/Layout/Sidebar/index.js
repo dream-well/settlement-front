@@ -17,8 +17,8 @@ export default function Sidebar() {
                 <div className='flex items-center cursor-pointer text-[20px] ml-[26px]'>
                     <i className='material-icons'>attach_money</i>
                     <span className='ml-[4px]'>
-                        <span className='text-[#f39c2b]'>Digi</span>
-                        <span className='text-[#40496b]'>rupee</span>
+                        <span className='text-[#f39c2b]'>Rupee</span>
+                        <span className='text-[#40496b]'>cash</span>
                     </span>
                 </div>
             </nav>

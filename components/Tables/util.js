@@ -4,9 +4,9 @@ export function getCellText(row, col) {
         switch(typeof row[col.value]) {
             case 'string':
                 return row[col.value];
-            case 'undefined':
             case 'number':
-                return '';
+                return row[col.value].toLocaleString();
+            case 'undefined':
         }
         if(isNan(row[col.value])) return '';
         return row[col.value].toString();
