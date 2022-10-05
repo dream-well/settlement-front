@@ -8,7 +8,7 @@ export function getCellText(row, col) {
                 return row[col.value].toLocaleString();
             case 'undefined':
         }
-        if(isNan(row[col.value])) return '';
+        if(isNaN(row[col.value])) return '';
         return row[col.value].toString();
     }
     if(typeof col.value == 'function') 
