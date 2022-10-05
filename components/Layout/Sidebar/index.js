@@ -67,8 +67,8 @@ const menu = [
         icon: 'money'
     },
     {
-        text: 'Withdrawals',
-        href: '/withdrawals',
+        text: 'Payouts',
+        href: '/payouts',
         icon: 'contacts'
     },
     {
