@@ -6,7 +6,7 @@ import { useEffect } from "react";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Settlements() {
-    const { data, error } = useSWR('http://localhost:8000/dashboard', fetcher);
+    const { data, error } = useSWR(`/api/dashboard`, fetcher);
     let row =  {
         deposits: "------------",
         cashouts: "------------",
