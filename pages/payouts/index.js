@@ -47,7 +47,7 @@ const cols = [
 ]
 
 const statusList = [
-    "Init", "NotPaid", "Paid", "Expired", "Chargebacked", "Error", "CriticalError"
+    "Init", "NotPaid", "Locked", "Paid", "Error", "CriticalError"
 ]
 
 const colors = {
