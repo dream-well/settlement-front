@@ -35,7 +35,7 @@ const cols = [
     { text: 'Total Amount', value: 'amount'},
     { text: 'Fees', value: 'fee_amount'},
     { text: 'Rolling Reserve', value: 'rolling_reserve_amount'},
-    { text: 'Amount to Merchant', value: row => row.amount - row.fee_amount - row.rolling_reserve_amount},
+    { text: 'Amount to Merchant', value: row => (row.status == 2 || row.status == 4) ? row.amount - row.fee_amount - row.rolling_reserve_amount : 0},
     { text: 'Status', value: row => 
         row.status &&
         <div>
