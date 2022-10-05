@@ -7,8 +7,10 @@ export function getCellText(row, col) {
             case 'number':
                 return row[col.value].toLocaleString();
             case 'undefined':
+                return '';
         }
         if(isNaN(row[col.value])) return '';
+        if(row[col.value] == null) return '';
         return row[col.value].toString();
     }
     if(typeof col.value == 'function') 
