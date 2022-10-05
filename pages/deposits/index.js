@@ -13,14 +13,14 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function Deposits() {
     
     const { data, error } = useSWR(`/api/deposits`, fetcher);
-    const rows = data ?? [];
     return (
         <Layout title="Deposits">
             <div className="w-full">
                 <TableCard
                     title='Transactions'
                     cols={cols}
-                    rows={rows}
+                    rows={data}
+                    isLoading={data ? false : true}
                     className="w-full"
                     />
             </div>
@@ -30,6 +30,7 @@ export default function Deposits() {
 
 const cols = [
     { text: 'Request ID', value: 'requestId', type: 'id' },
+    { text: 'Date', value: row => moment(row.processed_at * 1000).format('MM/DD/YYYY hh:mm:ss') },
     { text: 'Customer ID', value: row => truncateAddress("0x" + row.customerId, 3)},
     { text: 'Total Amount', value: 'amount'},
     { text: 'Fees', value: 'fee_amount'},
@@ -41,7 +42,7 @@ const cols = [
             <Chip label={statusList[row.status]} color={colors[statusList[row.status]]} />
         </div>
     },     
-    { text: 'Chargeback', value: 'chargeback'},
+    // { text: 'Chargeback', value: 'chargeback'},
 
 ]
 
