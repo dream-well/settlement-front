@@ -59,15 +59,8 @@ export default function Settlements() {
 }
 const cols = [
     { text: 'Deposits', value: 'deposits', type:'id'},
-    { text: 'Cashouts', value: 'cashouts'},
-    { text: 'Settlements', value: row => 
-        <div>
-            <span className="text-[#3a7bfd] font-bold">Pending: </span>
-            <span className="text-[#3a7bfd]">{row.settlements_pending}</span>,&nbsp;&nbsp;
-            <span className="text-[#ffc107] font-bold">Settled: </span>
-            <span className="text-[#ffc107]">{row.settlements_settled}</span>
-        </div>
-    },
+    { text: 'Total Payouts Processed', value: 'cashouts'},
+    { text: 'Settlements', value: 'settlements_settled'},
     { text: 'Rolling Reserve', value: row => 
         <div>
             <span className="text-[#3a7bfd] font-bold">Total: </span>
