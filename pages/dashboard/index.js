@@ -59,7 +59,7 @@ export default function Settlements() {
 }
 const cols = [
     { text: 'Deposits', value: 'deposits', type:'id'},
-    { text: 'Total Payouts Processed', value: 'cashouts'},
+    { text: 'Payouts', value: 'cashouts'},
     { text: 'Settlements', value: 'settlements_settled'},
     { text: 'Rolling Reserve', value: row => 
         <div>
