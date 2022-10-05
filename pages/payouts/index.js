@@ -9,7 +9,6 @@ import Chip from 'components/Chips/Chip'
 export default function Deposits() {
     return (
         <Layout title="Payouts">
-            <SearchPanel />
             <div className="w-full">
                 <TableCard
                     title='Transactions'
