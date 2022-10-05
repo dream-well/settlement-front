@@ -1,19 +1,26 @@
+import Button from "components/Buttons/Button"
 import Layout from "components/Layout"
-import React, { useState } from 'react';
-import TableCard from "components/Tables/TableCard";
-import SearchPanel from "components/SearchPanel";
+import SearchPanel from "components/SearchPanel"
+import TableCard from "components/Tables/TableCard"
+import Image from "next/image"
 import moment from "moment";
 import Chip from 'components/Chips/Chip'
+import useSWR from 'swr';
+import { truncateAddress } from "utils"
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 
-export default function Deposits() {
+export default function Payouts() {
+    
+    const { data, error } = useSWR(`/api/payouts`, fetcher);
     return (
         <Layout title="Payouts">
             <div className="w-full">
                 <TableCard
                     title='Transactions'
                     cols={cols}
-                    rows={rows}
+                    rows={data}
+                    isLoading={data ? false : true}
                     className="w-full"
                     />
             </div>
@@ -22,116 +29,109 @@ export default function Deposits() {
 }
 
 const cols = [
-    { text: 'OrderID', value: 'orderId', type: 'id' },
-    { text: 'Customer ID', value: 'customerId'},
-    { text: 'Txn Request time', value: row => 
-        <div className='flex flex-col justify-center'>
-            <p>{moment(row.txnRequest).format("YYYY/MM/DD")}</p>
-            <p className='text-sm'>{moment(row.txnRequest).format("HH:mm:ss")}</p>
-        </div>
-    },
-    { text: 'Txn Status time', value: row => 
-        <div className='flex flex-col justify-center'>
-            <p>{moment(row.txnStatus).format("YYYY/MM/DD")}</p>
-            <p className='text-sm'>{moment(row.txnStatus).format("HH:mm:ss")}</p>
-        </div>
-    },
-    { text: 'Amount', value: row => row.amount.toLocaleString()},
-    { text: 'Remarks', value: 'remarks' },
-    { text: 'Fees', value: row => row.fees + ' %'},
-    { text: 'Amt to Settle', value: row => row.amountToSettle.toLocaleString()},
+    { text: 'Request ID', value: 'requestId', type: 'id' },
+    { text: 'Date', value: row => moment(row.processed_at * 1000).format('MM/DD/YYYY hh:mm:ss') },
+    { text: 'Customer ID', value: row => truncateAddress("0x" + row.customerId, 3)},
+    { text: 'Total Amount', value: 'amount'},
+    { text: 'Fees', value: 'fee_amount'},
+    { text: 'Account Info', value: row => truncateAddress("0x" + row.customerId, 3)},
+    { text: 'remark', value: 'remark'},
     { text: 'Status', value: row => 
+        row.status &&
         <div>
-            <Chip label={row.status} color={colors[row.status]} className='capitalize'/>
+            <Chip label={statusList[row.status]} color={colors[statusList[row.status]]} />
         </div>
     },     
-    { text: 'AC Details', value: 'acDetails' },
+    // { text: 'Chargeback', value: 'chargeback'},
+
+]
+
+const statusList = [
+    "Init", "NotPaid", "Paid", "Expired", "Chargebacked", "Error", "CriticalError"
 ]
 
 const colors = {
-    success: "#97cc50",
-    initiated: "#f1871b",
-    expired: "#ea566b",
-    chargebacked: "#4898ff",
+    Paid: "#97cc50",
+    NotPaid: "#f1871b",
+    Expired: "#ea566b",
+    Chargebacked: "#4898ff",
     pending: "#f1871b",
-    error: "#ea566b",
-    harvested: "#97cc50",
-    ready_to_harvest: "#4898ff",
-    pending: "#f1871b",
+    Error: "#ea566b",
+    CriticalError: "#ea566b"
 }
 
 const rows = [
     {
-        orderId: "1234564",
+        requestId: "1234564",
         customerId: "0001",
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        remarks: "remarks",
+        rollingReserve: 500,
+        rollingReserveStatus: 'harvested',
         fees: 5,
-        amountToSettle: 10000,
+        amountToMerchant: 10000,
         status: "success",
-        acDetails: "Selvanthegod icicci20124 465464564646879846",
     },
     {
-        orderId: "1234564",
+        requestId: "1234564",
         customerId: "0002",
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        remarks: "remarks",
+        rollingReserve: 500,
+        rollingReserveStatus: 'harvested',
         fees: 5,
-        amountToSettle: 10000,
-        status: "pending",
-        acDetails: "Selvanthegod icicci20124 465464564646879846",
+        amountToMerchant: 10000,
+        status: "initiated",
     },
     {
-        orderId: "1234564",
+        requestId: "1234564",
         customerId: "0003",
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        remarks: "remarks",
+        rollingReserve: 500,
+        rollingReserveStatus: 'ready_to_harvest',
         fees: 5,
-        amountToSettle: 10000,
+        amountToMerchant: 10000,
         status: "expired",
-        acDetails: "Selvanthegod icicci20124 465464564646879846",
     },
     {
-        orderId: "1234564",
+        requestId: "1234564",
         customerId: "0004",
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        remarks: "remarks",
+        rollingReserve: 500,
+        rollingReserveStatus: 'pending',
         fees: 5,
-        amountToSettle: 10000,
-        status: "error",
-        acDetails: "Selvanthegod icicci20124 465464564646879846",
+        amountToMerchant: 10000,
+        status: "chargebacked",
     },
     {
-        orderId: "1234564",
+        requestId: "1234564",
         customerId: "0005",
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        remarks: "remarks",
+        rollingReserve: 500,
+        rollingReserveStatus: 'harvested',
         fees: 5,
-        amountToSettle: 10000,
-        status: "pending",
-        acDetails: "Selvanthegod icicci20124 465464564646879846",
+        amountToMerchant: 10000,
+        status: "expired",
     },
     {
-        orderId: "1234564",
+        requestId: "1234564",
         customerId: "0006",
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        remarks: "remarks",
+        rollingReserve: 500,
+        rollingReserveStatus: 'harvested',
         fees: 5,
-        amountToSettle: 10000,
-        status: "pending",
-        acDetails: "Selvanthegod icicci20124 465464564646879846",
+        amountToMerchant: 10000,
+        status: "success",
     },
     
 ]
