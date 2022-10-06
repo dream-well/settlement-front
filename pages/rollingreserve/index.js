@@ -18,7 +18,7 @@ export default function RollingReserve() {
         <Layout title="Rolling Reserve">
             <div className='flex pb-4 space-x-4'>
                 <Box title='Total Rolling Reserve' value={rollingreserve?.total} />
-                <Box title='Ready to Harvest' value={rollingreserve?.released} />
+                <Box title='Ready to Harvest' value={rollingreserve?.pending} />
             </div>
             <div className="w-full">
                 <TableCard
