@@ -82,11 +82,6 @@ const menu = [
         icon: 'account_balance'
     },
     {
-        text: 'Swap To BUSD (BSC)',
-        href: '/swap',
-        icon: 'swap_horiz'
-    },
-    {
         text: 'Chargebacks',
         href: '/chargebacks',
         icon: 'calendar_today'
@@ -101,9 +96,4 @@ const menu = [
         href: '/systeminfo',
         icon: 'info'
     },   
-    {
-        text: 'Auto Settlements (BSC)',
-        href: '/autosettlements',
-        icon: 'create'
-    },
 ]
