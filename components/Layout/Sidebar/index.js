@@ -77,6 +77,11 @@ const menu = [
         icon: 'payments'
     },
     {
+        text: 'Rolling Reserve',
+        href: '/rollingreserve',
+        icon: 'account_balance'
+    },
+    {
         text: 'Swap To BUSD (BSC)',
         href: '/swap',
         icon: 'swap_horiz'
