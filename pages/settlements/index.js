@@ -1,107 +1,127 @@
 import Button from "components/Buttons/Button"
-import Chip from "components/Chips/Chip"
 import Layout from "components/Layout"
 import SearchPanel from "components/SearchPanel"
 import TableCard from "components/Tables/TableCard"
-import moment from "moment"
+import Image from "next/image"
+import moment from "moment";
+import Chip from 'components/Chips/Chip'
+import useSWR from 'swr';
+import { truncateAddress } from "utils"
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 
 export default function Settlements() {
-
+    
+    const { data, error } = useSWR(`/api/settlements`, fetcher);
     return (
-        <Layout title="Settlements">
-            <SearchPanel />
+        <Layout title="Settlements  ">
             <div className="w-full">
                 <TableCard
                     title='Transactions'
                     cols={cols}
-                    rows={rows}
+                    rows={data}
+                    isLoading={data ? false : true}
                     className="w-full"
                     />
             </div>
         </Layout>
     )
 }
+
 const cols = [
-    { text: 'OrderID', value: 'orderId', type: 'id' },
-    { text: 'Txn Request time', value: row => 
-        <p>
-            {moment(row.txnRequest).format("DD/MM/YYYY")} {moment(row.txnRequest).format("HH:mm:ss")}
-        </p>
-    },
-    { text: 'Txn Status time', value: row => 
-        <p>
-            {moment(row.txnStatus).format("DD/MM/YYYY")} {moment(row.txnStatus).format("HH:mm:ss")}
-        </p>
-    },
-    { text: 'Amount', value: row => row.amount.toLocaleString()},
-    { text: 'Info', value: "info" },
+    { text: 'Settlement ID', value: 'id', type: 'id' },
+    { text: 'Process Date', value: row => row.createdAt ? moment(row.createdAt * 1000).format('MM/DD/YYYY hh:mm:ss'): "" },
+    { text: 'Amount', value: 'amount'},
     { text: 'Status', value: row => 
+        row.status &&
         <div>
-            <Chip label={row.status} color={colors[row.status]} />
+            <Chip label={statusList[row.status]} color={colors[statusList[row.status]]} />
         </div>
     },     
+    // { text: 'Chargeback', value: 'chargeback'},
 
 ]
+
+const statusList = [
+    "Init", "Processed", "Rejected"
+]
+
 const colors = {
-    success: "#97cc50",
-    initiated: "#f1871b",
-    expired: "#ea566b",
-    chargebacked: "#4898ff",
-    pending: "#f1871b",
-    error: "#ea566b",
-    harvested: "#97cc50",
-    ready_to_harvest: "#4898ff",
-    pending: "#f1871b",
+    Processed: "#97cc50",
+    Rejected: "#ea566b",
 }
 
 const rows = [
     {
-        orderId: "1234564",
+        requestId: "1234564",
+        customerId: "0001",
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        info: "info type",
+        rollingReserve: 500,
+        rollingReserveStatus: 'harvested',
+        fees: 5,
+        amountToMerchant: 10000,
         status: "success",
     },
     {
-        orderId: "1234564",
+        requestId: "1234564",
+        customerId: "0002",
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        info: "info type",
+        rollingReserve: 500,
+        rollingReserveStatus: 'harvested',
+        fees: 5,
+        amountToMerchant: 10000,
         status: "initiated",
     },
     {
-        orderId: "1234564",
+        requestId: "1234564",
+        customerId: "0003",
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        info: "info type",
+        rollingReserve: 500,
+        rollingReserveStatus: 'ready_to_harvest',
+        fees: 5,
+        amountToMerchant: 10000,
         status: "expired",
     },
     {
-        orderId: "1234564",
+        requestId: "1234564",
+        customerId: "0004",
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        info: "info type",
+        rollingReserve: 500,
+        rollingReserveStatus: 'pending',
+        fees: 5,
+        amountToMerchant: 10000,
         status: "chargebacked",
     },
     {
-        orderId: "1234564",
+        requestId: "1234564",
+        customerId: "0005",
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        info: "info type",
+        rollingReserve: 500,
+        rollingReserveStatus: 'harvested',
+        fees: 5,
+        amountToMerchant: 10000,
         status: "expired",
     },
     {
-        orderId: "1234564",
+        requestId: "1234564",
+        customerId: "0006",
         txnRequest: "2022-09-16T12:25:13.870Z",
         txnStatus: "2022-09-16T12:25:13.870Z",
         amount: 10005,
-        info: "info type",
+        rollingReserve: 500,
+        rollingReserveStatus: 'harvested',
+        fees: 5,
+        amountToMerchant: 10000,
         status: "success",
     },
     

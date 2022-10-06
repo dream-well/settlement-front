@@ -30,7 +30,7 @@ export default function Payouts() {
 
 const cols = [
     { text: 'Request ID', value: 'requestId', type: 'id' },
-    { text: 'Date', value: row => moment(row.processed_at * 1000).format('MM/DD/YYYY hh:mm:ss') },
+    { text: 'Process Date', value: row => row.processed_at ? moment(row.processed_at * 1000).format('MM/DD/YYYY hh:mm:ss'): "" },
     { text: 'Customer ID', value: row => truncateAddress("0x" + row.customerId, 3)},
     { text: 'Total Amount', value: 'amount'},
     { text: 'Fees', value: 'fee_amount'},

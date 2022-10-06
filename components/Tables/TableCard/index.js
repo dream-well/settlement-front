@@ -49,7 +49,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, combotype=false})
                     </div>
                 }
             </div>
-            <div className='flex justify-between mt-5'>
+            <div className='flex justify-between'>
                 <div className='flex'>
                     show 
                     <select
