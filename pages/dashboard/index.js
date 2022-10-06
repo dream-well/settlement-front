@@ -3,50 +3,24 @@ import Table from "components/Tables/Table"
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import useSWR from "swr";
 import { useEffect } from "react";
+import Box from 'components/Boxes/Box'
 import { BarLoader } from "react-spinners";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Settlements() {
     const { data, error } = useSWR(`/api/dashboard`, fetcher);
-    const custom_cols = cols.map(col =>({...col, 
-        value: data ? col.value : () => (<div className='py-[10px]'><BarLoader color='#1e2f65' width='100px'/></div>)
-    }))
-    let row =  {
-            deposits: data?.deposits,
-            cashouts: data?.cashouts,
-            settlements_pending: data?.settlements.pending,
-            settlements_settled: data?.settlements.settled,
-            rollingreserve_total: data?.rollingReserve.total,
-            rollingreserve_released: data?.rollingReserve.released,
-            chargeback: data?.chargeback,
-        };
     return (
         <Layout title="DashBoard">
-            <div className="w-full">
-                <div className='bg-white rounded-[12px] shadow pb-[10px] px-6 pt-6 pb-10'>
-                    <FormControl>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={2}
-                            size="small"
-                            onChange={(e) => setmonth(e.target.value)}
-                        >
-                        <MenuItem value={1}>Current Month</MenuItem>
-                        <MenuItem value={2}>Today</MenuItem>
-                        <MenuItem value={3}>Yesterday</MenuItem>
-                        <MenuItem value={4}>August 2022</MenuItem>
-                        <MenuItem value={5}>July 2022</MenuItem>
-                        <MenuItem value={6}>June 2022</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <Table
-                        className='mt-6'
-                        title='Current Month'
-                        cols={custom_cols}
-                        rows={[row]}
-                        />
-                </div>
+            <div className='flex pb-4 flex-wrap'>
+                <Box className='mr-4 mb-6' title='Deposits' value={data?.deposits} />
+                <Box className='mr-10 mb-6' title='Payouts' value={data?.cashouts} />
+                <Box className='mr-4 mb-6' title='Settlement Pending' value={data?.settlements.pending} />
+                <Box className='mr-4 mb-6' title='Settlement Paid' value={data?.settlements.settled} />
+                <div className='w-full'></div>
+                <Box className='mr-4 mb-6' title='Total Rolling Reserve' value={data?.rollingReserve.total} />
+                <Box className='mr-10 mb-6' title='Rolling Reserve Paid' value={data?.rollingReserve.released} />
+                <Box className='mr-4 mb-6' title='Total Chargeback' value={data?.totalChargeback} />
+                <Box className='mr-4 mb-6' title='Chargeback Paid' value={data?.totalChargebackPaid} />
             </div>
         </Layout>
     )
