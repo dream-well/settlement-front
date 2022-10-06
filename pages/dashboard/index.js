@@ -12,23 +12,13 @@ export default function Settlements() {
         value: data ? col.value : () => (<div className='py-[10px]'><BarLoader color='#1e2f65' width='100px'/></div>)
     }))
     let row =  {
-        deposits: '',
-        cashouts: '',
-        settlements_pending: '',
-        settlements_settled: '',
-        rollingreserve_total: '',
-        rollingreserve_released: '',
-        chargeback: '',
-    };
-    if(data)
-        row =  {
-            deposits: data.deposits,
-            cashouts: data.cashouts,
-            settlements_pending: data.settlements.pending,
-            settlements_settled: data.settlements.settled,
-            rollingreserve_total: data.rollingReserve.total,
-            rollingreserve_released: data.rollingReserve.released,
-            chargeback: data.chargeback,
+            deposits: data?.deposits,
+            cashouts: data?.cashouts,
+            settlements_pending: data?.settlements.pending,
+            settlements_settled: data?.settlements.settled,
+            rollingreserve_total: data?.rollingReserve.total,
+            rollingreserve_released: data?.rollingReserve.released,
+            chargeback: data?.chargeback,
         };
     return (
         <Layout title="DashBoard">

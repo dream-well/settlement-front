@@ -81,8 +81,8 @@ const menu = [
         icon: 'account_balance'
     },
     {
-        text: 'Chargebacks',
-        href: '/chargebacks',
+        text: 'Transactions',
+        href: '/transactions',
         icon: 'calendar_today'
     },
     {

@@ -7,7 +7,7 @@ export default function Chargebacks() {
 
     return (
         <Layout title=" ">
-            <TableCard title='Chargebacks' cols={cols} rows={rows}/>
+            <TableCard title='Transactions' cols={cols} rows={rows}/>
         </Layout>
     )
 }

@@ -15,6 +15,8 @@ export default function SystemInfo() {
         { title: 'Deposit range', value: `${info?.minPayin} INR - ${info?.maxPayin} INR` },
         { title: 'Payout Fee', value: info?.payoutFee + '%'},
         { title: 'Payout range', value: `${info?.minPayout} INR - ${info?.maxPayout} INR` },
+        { title: 'Rolling Reserve', value: info?.rollingReserve + '%'},
+        { title: 'Rolling Reserve Period', value: info?.rollingReservePeriod + ' days'},
         { title: 'Min Settlement Amount', value: info?.minimum_settlement_amount },
         { title: 'Payout Payin Ratio', value: info?.payout_payin_ratio_limit + '%' },
         { title: 'Settlement Payin Ratio', value: info?.settlement_ratio + '%' },

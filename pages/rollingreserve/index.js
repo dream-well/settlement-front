@@ -19,6 +19,9 @@ export default function RollingReserve() {
             <div className='flex pb-4 space-x-4'>
                 <Box title='Total Rolling Reserve' value={rollingreserve?.total} />
                 <Box title='Ready to Harvest' value={rollingreserve?.pending} />
+                <Box title='Rolling Reserve Paid' value={rollingreserve?.released} />
+                <Box title='Total Chargeback' value={rollingreserve?.totalChargeback} />
+                <Box title='Chargeback Paid' value={rollingreserve?.totalChargebackPaid} />
             </div>
             <div className="w-full">
                 <TableCard
@@ -36,7 +39,7 @@ export default function RollingReserve() {
 const cols = [
     { text: 'Process Date', value: row => row.createdAt ? moment(row.createdAt * 1000).format('MM/DD/YYYY hh:mm:ss'): "" },
     { text: 'Amount', value: 'amount'},
-    { text: 'Tx ID', type: 'id', value: row => <a target='_blank' href={`${row.explorer}/tx/${row.txHash}`}>truncateAddress(row[txHash])</a> },
+    { text: 'Tx ID', type: 'id', value: row => <a target='_blank' href={`${row.explorer}/tx/${row.txHash}`} className='text-[#56f]'>{truncateAddress(row.txHash)}</a> },
     // { text: 'Chargeback', value: 'chargeback'},
 
 ]
