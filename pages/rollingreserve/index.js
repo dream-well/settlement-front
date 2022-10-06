@@ -6,8 +6,8 @@ import Image from "next/image"
 import moment from "moment";
 import Chip from 'components/Chips/Chip'
 import Box from 'components/Boxes/Box'
-import useSWR from 'swr';
 import { truncateAddress } from "utils"
+import useSWR from 'swr';
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 
@@ -36,7 +36,7 @@ export default function RollingReserve() {
 const cols = [
     { text: 'Process Date', value: row => row.createdAt ? moment(row.createdAt * 1000).format('MM/DD/YYYY hh:mm:ss'): "" },
     { text: 'Amount', value: 'amount'},
-    { text: 'Tx ID', type: 'id', value: row => truncateAddress(row[txHash]) },
+    { text: 'Tx ID', type: 'id', value: row => <a target='_blank' href={`${row.explorer}/tx/${row.txHash}`}>truncateAddress(row[txHash])</a> },
     // { text: 'Chargeback', value: 'chargeback'},
 
 ]

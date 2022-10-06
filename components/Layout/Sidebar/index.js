@@ -5,10 +5,9 @@ import { selectMenuState } from "../../../store/slices/menuSlice";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
-export default function Sidebar() {
+export default function Sidebar({merchantStatus}) {
 
     const router = useRouter();
-    const [merchantStatus, setmerchantStatus] = useState(1);
     const menuState = useSelector(selectMenuState);
 
     return (
@@ -85,11 +84,6 @@ const menu = [
         text: 'Chargebacks',
         href: '/chargebacks',
         icon: 'calendar_today'
-    },
-    {
-        text: 'Fees',
-        href: '/fees',
-        icon: 'forum'
     },
     {
         text: 'System Info',

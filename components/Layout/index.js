@@ -3,12 +3,14 @@ import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import { useSelector } from "react-redux";
 import { selectmaintenanceState } from "store/slices/maintenanceSlice";
+import useSWR from 'swr';
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 function Layout({children, title}) {
-    const maintenanceState = useSelector(selectmaintenanceState);
+    const { data: info } = useSWR(`/api/systemstatus`, fetcher);
     return (
         <div className='flex min-h-screen w-full'>
-            <Sidebar />
+            <Sidebar merchantStatus={!info?.merchantStatus == 1} />
             <div className='flex flex-col w-full bg-[#f5f6f8] '>
                 <Header />
                 <div className='flex-grow px-4'>
@@ -18,7 +20,7 @@ function Layout({children, title}) {
                             <div className="flex items-center">
                                 <span className="font-medium text-[12px]">Maintenance Mode:</span>
                                 {
-                                    maintenanceState ?
+                                    info?.maintenanceMode == 1 ?
                                     <span className="bg-[#dceacb] text-[#b5c918] text-[10px] rounded-sm mx-1 px-1">Yes</span> : 
                                     <span className="bg-[#fad4d4] text-[#e82c5d] text-[10px] rounded-sm mx-1 px-1">No</span>    
                                 }

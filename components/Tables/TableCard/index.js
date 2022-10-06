@@ -79,7 +79,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, combotype=false})
                 </div>
             </div>
             <div className='min-h-[320px] w-full relative mt-5'>
-                <Table cols={cols} rows={filteredRows} />
+                <Table cols={cols} rows={isLoading ? [] : filteredRows} />
                 {
                     isLoading && 
                         <div className='absolute w-full h-full'>

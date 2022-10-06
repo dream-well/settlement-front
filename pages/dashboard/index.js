@@ -3,18 +3,22 @@ import Table from "components/Tables/Table"
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import useSWR from "swr";
 import { useEffect } from "react";
+import { BarLoader } from "react-spinners";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Settlements() {
     const { data, error } = useSWR(`/api/dashboard`, fetcher);
+    const custom_cols = cols.map(col =>({...col, 
+        value: data ? col.value : () => (<div className='py-[10px]'><BarLoader color='#1e2f65' width='100px'/></div>)
+    }))
     let row =  {
-        deposits: "------------",
-        cashouts: "------------",
-        settlements_pending: '------',
-        settlements_settled: '------',
-        rollingreserve_total: '------',
-        rollingreserve_released: '------',
-        chargeback: "------------",
+        deposits: '',
+        cashouts: '',
+        settlements_pending: '',
+        settlements_settled: '',
+        rollingreserve_total: '',
+        rollingreserve_released: '',
+        chargeback: '',
     };
     if(data)
         row =  {
@@ -49,7 +53,7 @@ export default function Settlements() {
                     <Table
                         className='mt-6'
                         title='Current Month'
-                        cols={cols}
+                        cols={custom_cols}
                         rows={[row]}
                         />
                 </div>
