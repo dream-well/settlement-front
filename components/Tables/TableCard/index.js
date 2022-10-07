@@ -14,7 +14,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, combotype=false})
     const [page, setPage] = useState(0);
     const [perPage, setPerPage] = useState(5);
     const total = filteredRows.length;
-    filteredRows = filteredRows.slice(page * perPage, page * perPage + perPage);
+    filteredRows = filteredRows.slice(page * perPage, (page * perPage) + perPage);
     const maxPage = Math.ceil(total / perPage);
     const onPrev = () => { setPage(Math.max(0, page - 1)) };
     const onNext=()=>{ setPage(Math.min(maxPage-1, page+1))};
@@ -54,7 +54,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, combotype=false})
                     show 
                     <select
                         className='ml-6 border h-[25px] pl-2' 
-                        onChange={(e) => setPerPage(e.target.value)} 
+                        onChange={(e) => {setPage(0),setPerPage(Number(e.target.value))}} 
                         value={perPage}
                     >
                         <option value='5'>5</option>
@@ -79,7 +79,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, combotype=false})
                 </div>
             </div>
             <div className='min-h-[320px] w-full relative mt-5'>
-                <Table cols={cols} rows={isLoading ? [] : filteredRows} />
+                <Table cols={cols} rows={isLoading ? [] : filteredRows} index={page* perPage} />
                 {
                     isLoading && 
                         <div className='absolute w-full h-full'>
@@ -113,7 +113,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, combotype=false})
                             { maxPage > 0 && '/' }
                             { maxPage > 0 && <span className='mx-4'>{maxPage}</span> }
                             <button onClick={onNext}>Next</button>
-                        </div>
+                        </div>  
                     </div>
             }
         </div>

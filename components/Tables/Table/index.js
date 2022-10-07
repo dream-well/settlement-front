@@ -2,7 +2,7 @@
 import cn from 'classnames'
 import { getCellText } from '../util'
 
-function Table( {cols, rows, className} ) {
+function Table( {cols, rows, className, index = 0} ) {
     return (
         <table className={cn('border-grey border-t border-b w-full', className)}>
             <thead>
@@ -31,7 +31,7 @@ function Table( {cols, rows, className} ) {
                             {
                                 cols[0].type != 'id' &&
                                 <td className='text-left py-[12px] pl-[20px] pr-[4px]'>
-                                    {key + 1}
+                                    {index + key + 1}
                                 </td>
                             }
                             {

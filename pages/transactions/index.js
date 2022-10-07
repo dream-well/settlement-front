@@ -1,49 +1,25 @@
-import Button from "components/Buttons/Button"
 import Layout from "components/Layout"
 import TableCard from "components/Tables/TableCard"
-import Image from "next/image"
+import moment from "moment";
+import useSWR from 'swr';
+import { truncateAddress } from "utils";
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Chargebacks() {
+    const { data: info } = useSWR(`/api/systemstatus`, fetcher);
+    const { data: rows, error } = useSWR(`/api/transactions`, fetcher);
+
+    const cols = [
+        { text: 'DateTime', value: row => row.timestamp ? moment(row.timestamp * 1000).format('MM/DD/YYYY hh:mm:ss'): "" },
+        { text: 'Function', value: 'func'},
+        { text: 'Tx ID', type: 'id', value: row => <a target='_blank' href={`${info.explorer}/tx/${row.txHash}`} className='text-[#56f]'>{truncateAddress(row.txHash, 6, 10, 10, '. ')}</a> },
+        // { text: 'Arguments', value: row => <div className=''>{JSON.stringify(row.args)}</div> },
+    ]
 
     return (
         <Layout title=" ">
-            <TableCard title='Transactions' cols={cols} rows={rows}/>
+            <TableCard title='Transactions' cols={cols} rows={rows} isLoading={rows ? false : true}/>
         </Layout>
     )
 }
 
-const cols = [
-    { text: 'Dep ID', value: 'depId', type: 'id' },
-    { text: 'Dep Date', value: row => row.depDate.toLocaleDateString() },
-    { text: 'Phone No', value: 'phoneNo' },
-    { text: 'Chargeback Date', value: row => row.chargebackDate.toLocaleDateString() },
-    { text: 'Amount', value: 'amount' },
-    { text: 'Info', value: 'info' },
-]
-
-const rows = [
-    {
-        'depId': '00001',
-        'depDate': new Date(),
-        'phoneNo': '987654321',
-        'chargebackDate': new Date(),
-        'amount': parseInt(Math.random() * 10000),
-        'info': 'info text here'
-    },
-    {
-        'depId': '00002',
-        'depDate': new Date(),
-        'phoneNo': '12312453234',
-        'chargebackDate': new Date(),
-        'amount': parseInt(Math.random() * 10000),
-        'info': 'info text here'
-    },
-    {
-        'depId': '00003',
-        'depDate': new Date(),
-        'phoneNo': '98711234566',
-        'chargebackDate': new Date(),
-        'amount': parseInt(Math.random() * 10000),
-        'info': 'info text here'
-    },
-]
