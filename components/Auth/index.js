@@ -14,7 +14,7 @@ const auth_pages = {
 }
 
 const metamask = new InjectedConnector({
-    supportedChainIds: [316]
+    supportedChainIds: [3161]
   });
 
 function Auth({children}) {

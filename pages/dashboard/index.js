@@ -11,16 +11,21 @@ export default function Settlements() {
     const { data, error } = useSWR(`/api/dashboard`, fetcher);
     return (
         <Layout title="DashBoard">
-            <div className='flex pb-4 flex-wrap'>
-                <Box className='mr-4 mb-6' title='Deposits' value={data?.deposits} />
-                <Box className='mr-10 mb-6' title='Payouts' value={data?.cashouts} />
-                <Box className='mr-4 mb-6' title='Settlement Pending' value={data?.settlements.pending} />
-                <Box className='mr-4 mb-6' title='Settlement Paid' value={data?.settlements.settled} />
-                <div className='w-full'></div>
-                <Box className='mr-4 mb-6' title='Total Rolling Reserve' value={data?.rollingReserve.total} />
-                <Box className='mr-10 mb-6' title='Rolling Reserve Paid' value={data?.rollingReserve.released} />
-                <Box className='mr-4 mb-6' title='Total Chargeback' value={data?.totalChargeback} />
-                <Box className='mr-4 mb-6' title='Chargeback Paid' value={data?.totalChargebackPaid} />
+            <div className='flex pb-4 flex-wrap justify-between'>
+                <Box className='mr-4 mb-6' title='Deposits' value={data?.deposits} src="/images/dashboard/deposit.svg" />
+                <Box className='mr-4 mb-6' title='Payouts' value={data?.cashouts} src="/images/dashboard/payout.svg" />
+                <Box className='mr-4 mb-6' title='Settlement Pending' value={data?.settlements.pending} src="/images/dashboard/settlement_pending.svg" />
+                <Box className='mr-4 mb-6' title='Settlement Paid' value={data?.settlements.settled} src="/images/dashboard/settlement_paid.svg" />
+                <Box className='mr-4 mb-6' title='Total Rolling Reserve' value={data?.rollingReserve.total} src="/images/dashboard/reserve.svg" />
+                <Box className='mr-4 mb-6' title='Rolling Reserve Paid' value={data?.rollingReserve.released} src="/images/dashboard/reserve_paid.svg" />
+                <Box className='mr-4 mb-6' title='Total Chargeback' value={data?.totalChargeback} src="/images/dashboard/chargeback.svg" />
+                <Box className='mr-4 mb-6' title='Chargeback Paid' value={data?.totalChargebackPaid} src="/images/dashboard/chargeback_paid.svg" />
+                <div className='min-w-[200px] mr-4'></div>
+                <div className='min-w-[200px] mr-4'></div>
+                <div className='min-w-[200px] mr-4'></div>
+                <div className='min-w-[200px] mr-4'></div>
+                <div className='min-w-[200px] mr-4'></div>
+                <div className='min-w-[200px] mr-4'></div>
             </div>
         </Layout>
     )

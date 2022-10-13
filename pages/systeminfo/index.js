@@ -23,13 +23,16 @@ export default function SystemInfo() {
     ]
 
     return (
-        <Layout title=" ">
-            <div className='w-full flex items-center justify-center'>
-                <div className='w-[480px] rounded-[12px] bg-white px-[32px] mt-[40px] pt-[12px] pb-[12px] shadow-lg'>
-                    <h3 className='py-4 text-[25px] font-bold text-[#1e2f65] pb-[24px]'>System Info</h3>
+        <Layout title="System Info">
+            <div className='w-full flex'>
+                <div className='w-[480px] text-[12px] bg-white px-[32px] py-[30px] shadow-lg'>
+                    <div className='bg-[#F3F4F8] h-[44px] flex justify-between items-center px-[20px]'>
+                        <span>#</span>
+                        <span>Details</span>
+                    </div>
                     {
                         infos.map(({title, value}, key) => (
-                            <div className='flex justify-between mb-[24px] items-center' key={key}>
+                            <div className='flex justify-between items-center px-[20px] h-[40px] border-b border-[#F3F4F8]' key={key}>
                                 <h1>{title}</h1>
                                 { info != undefined ? 
                                     <span>{value}</span> :

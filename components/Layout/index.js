@@ -4,6 +4,8 @@ import Footer from "./Footer";
 import { useSelector } from "react-redux";
 import { selectmaintenanceState } from "store/slices/maintenanceSlice";
 import useSWR from 'swr';
+import cn from 'classnames';
+
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 function Layout({children, title}) {
@@ -13,23 +15,23 @@ function Layout({children, title}) {
             <Sidebar merchantStatus={!info?.merchantStatus == 1} />
             <div className='flex flex-col w-full bg-[#f5f6f8] '>
                 <Header />
-                <div className='flex-grow px-4'>
-                    <div className="min-h-full">
-                        <div className="flex justify-between">
-                            <h3 className='py-8 pl-2 text-[25px] font-bold text-[#1e2f65]'>{title}</h3>
-                            <div className="flex items-center">
-                                <span className="font-medium text-[12px]">Maintenance Mode:</span>
-                                {
-                                    info?.maintenanceMode == 1 ?
-                                    <span className="bg-[#dceacb] text-[#b5c918] text-[10px] rounded-sm mx-1 px-1">Yes</span> : 
-                                    <span className="bg-[#fad4d4] text-[#e82c5d] text-[10px] rounded-sm mx-1 px-1">No</span>    
-                                }
+                <div className='flex-grow'>
+                    <div className="min-h-full bg-[#F0F3F4]">
+                        <div className="flex justify-between bg-[#F6F8F8] border-b border-[#DEE5E7] h-[64px] items-center pl-[27px] pr-[30px]">
+                            <span className='text-[24px]'>{title}</span>
+                            <div className="flex items-center text-[12px]">
+                                <span className="font-medium pr-1">Maintenance Mode:</span>
+                                <span className={cn("text-white px-[7px] rounded-[3px]", info?.maintenanceMode == 1 ? 'bg-[#27C24C]' : 'bg-[#F05050]')}>
+                                    {info?.maintenanceMode == 1 ? "Yes" : "No"}
+                                </span>
                             </div>
                         </div>
-                        {children}
+                        <div className='px-[30px] pt-[30px]'>
+                            {children}
+                        </div>
                     </div>
                 </div>
-                <Footer/>
+                {/* <Footer/> */}
             </div>
         </div>
     )

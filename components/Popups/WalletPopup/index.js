@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectpopupSate, setpopupSate } from "store/slices/popupSlice"
 
 const metamask = new InjectedConnector({
-    supportedChainIds: [316]
+    supportedChainIds: [3161]
   });
 
 export default function WalletPopup({ className, hidden, onClose }) {

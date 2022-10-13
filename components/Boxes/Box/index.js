@@ -1,15 +1,18 @@
 import cn from 'classnames'
 import { PuffLoader } from 'react-spinners';
 
-function Box({title, value, className}) {
+function Box({title, value, className, src}) {
     return (
-        <div className={cn('w-[194px] h-[139px] flex flex-col bg-white rounded-[10px] items-center justify-center', className)}>
-            <div className='text-[12px] uppercase pt-[24px] text-center px-[16px]'>{title}</div>
-            <div className='text-[33px] font-medium py-[16px]'>
+        <div className={cn('min-w-[200px] h-[180px] flex flex-col bg-white items-center justify-center', className)}>
+            <div className='w-[77px] h-[77px] bg-[#F6F8F8] rounded-full flex justify-center items-center'>
+                <img src={src} />
+            </div>
+            <div className='text-[12px] text-[#869FB1] uppercase pt-[24px] text-center px-[16px]'>{title}</div>
+            <div className='text-[24px] font-medium'>
                 {value}
                 {
                     value == null && 
-                    <PuffLoader color='grey' size={50} />
+                    <PuffLoader color='grey' size={36} />
                 }
             </div>
         </div>

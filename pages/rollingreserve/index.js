@@ -17,11 +17,11 @@ export default function RollingReserve() {
     return (
         <Layout title="Rolling Reserve">
             <div className='flex pb-4 space-x-4'>
-                <Box title='Total Rolling Reserve' value={rollingreserve?.total} />
-                <Box title='Ready to Harvest' value={rollingreserve?.pending} />
-                <Box title='Rolling Reserve Paid' value={rollingreserve?.released} />
-                <Box title='Total Chargeback' value={rollingreserve?.totalChargeback} />
-                <Box title='Chargeback Paid' value={rollingreserve?.totalChargebackPaid} />
+                <Box title='Total Rolling Reserve' value={rollingreserve?.total} src="/images/dashboard/reserve.svg" />
+                <Box title='Ready to Harvest' value={rollingreserve?.pending} src="/images/dashboard/harvest.svg" />
+                <Box title='Rolling Reserve Paid' value={rollingreserve?.released} src="/images/dashboard/reserve_paid.svg" />
+                <Box title='Total Chargeback' value={rollingreserve?.totalChargeback} src="/images/dashboard/chargeback.svg" />
+                <Box title='Chargeback Paid' value={rollingreserve?.totalChargebackPaid} src="/images/dashboard/chargeback_paid.svg" />
             </div>
             <div className="w-full">
                 <TableCard
