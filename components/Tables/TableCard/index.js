@@ -18,10 +18,10 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, children, lastRow
     const maxPage = Math.ceil(total / perPage);
     const onPrev = () => { setPage(Math.max(0, page - 1)) };
     const onNext=()=>{ setPage(Math.min(maxPage-1, page+1))};
-    const [month, setmonth] = useState(1);
+    
     return (
         <div className='bg-white rounded-[12px] shadow pb-[10px] px-6'>
-            <div className='flex'>
+            <div className='flex mb-2'>
                 <div className='font-medium text-[22px] pt-7 pb-2 flex-grow'>
                     { title }
                 </div>
@@ -29,7 +29,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, children, lastRow
             {
                 children
             }
-            <div className='flex justify-between mt-5'>
+            <div className='flex justify-between mt-3'>
                 <div className='flex items-center'>
                     show 
                     <select
