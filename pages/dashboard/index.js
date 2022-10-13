@@ -9,11 +9,15 @@ const fetcher = ({url, args}) => fetch(url + '?' + new URLSearchParams(args)).th
 
 export default function Settlements() {
     
-    const [value, setValue] = useState(0);
-    const list = ['AllTime', 'Today', 'Yesterday', 'This Month'];
-
     let from, to;
     let date = moment((new Date).toDateString());
+
+    const [value, setValue] = useState(0);
+    const list = ['AllTime', 'Today', 'Yesterday', 'This Month', 
+        moment(date).subtract(1, 'month').format('MMM YYYY'),
+        moment(date).subtract(2, 'month').format('MMM YYYY'),
+    ];
+
 
     switch(value) {
         case 0: break;
@@ -21,11 +25,19 @@ export default function Settlements() {
             from = date;
             break;
         case 2:
+            to = moment(date);
             from = date.subtract(1, 'day');
-            to = date;
             break;
         case 3:
             from = date.set('date', 1);
+            break;
+        case 4:
+            to = date.set('date', 1);
+            from = moment(to).subtract(1, 'month');
+            break;
+        case 5:
+            to = date.set('date', 1).subtract(1, 'month');
+            from = moment(to).subtract(1, 'month');
             break;
     }
     const args = {};
