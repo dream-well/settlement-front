@@ -19,7 +19,6 @@ export default function Deposits() {
     const { data: rows, error } = useSWR(`/api/deposits`, fetcher);
 
     const [dateRange, setDateRange] = useState();
-    const [customer, setCustomer] = useState();
     const [status, setStatus] = useState(null);
 
     const filteredRows = rows ? 
@@ -30,16 +29,15 @@ export default function Deposits() {
             amount_to_merchant: (row.status == 2 || row.status == 4) ? 
                 row.amount - row.fee_amount - row.rolling_reserve_amount : 0
         }))
-        .reverse() : [];
+        : [];
     
-
     const lastRow = filteredRows.reduce((_, row) => ({
-        processed_at: 'Total',
+        requestId: 'Total',
         amount: _.amount  + row.amount,
         fee_amount: _.fee_amount  + row.fee_amount,
         rolling_reserve_amount: _.rolling_reserve_amount  + row.rolling_reserve_amount,
         amount_to_merchant: _.amount_to_merchant + row.amount_to_merchant
-    }), {processed_at: 'Total', amount: 0, fee_amount: 0, rolling_reserve_amount: 0, amount_to_merchant: 0})    
+    }), {requestId: 'Total', amount: 0, fee_amount: 0, rolling_reserve_amount: 0, amount_to_merchant: 0})    
 
     return (
         <Layout title="Deposits">
@@ -53,11 +51,11 @@ export default function Deposits() {
                     lastRow={lastRow}
                 >
                     <div className='flex items-center'>
-                        <span className='mr-1'>Filter By Date:</span>
+                        <span className='mr-2'>Filter By Date:</span>
                         <DateRangePicker value={dateRange} onChange={setDateRange}/>
                         {/* Filter By Customer: &nbsp;
                         <Input style={{width:200}} value={customer} onChange={setCustomer}/> &nbsp;&nbsp;  */}
-                        <span className='ml-4 mr-1'>Filter By Status:</span>
+                        <span className='ml-4 mr-2'>Filter By Status:</span>
                         <SelectPicker data={statusList.map((each, i) => ({label: each, value: i}))} searchable={false} style={{ width: 140 }}  
                             value={status}
                             onChange={setStatus}

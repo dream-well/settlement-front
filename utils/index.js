@@ -1,5 +1,5 @@
 export const truncateAddress = (address, dots = 6, left=5, right=6, dot = ' .') => {
-    if (!address) return "No Account";
+    if (!address) return "";
     const match = address.match(
       new RegExp(`(0x[a-zA-Z0-9]{${left}})[a-zA-Z0-9]+([a-zA-Z0-9]{${right}})$`)
     );

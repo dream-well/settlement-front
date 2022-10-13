@@ -18,7 +18,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, children, lastRow
     const maxPage = Math.ceil(total / perPage);
     const onPrev = () => { setPage(Math.max(0, page - 1)) };
     const onNext=()=>{ setPage(Math.min(maxPage-1, page+1))};
-    
+
     return (
         <div className='bg-white rounded-[12px] shadow pb-[10px] px-6'>
             <div className='flex mb-2'>
@@ -59,7 +59,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, children, lastRow
                 </div>
             </div>
             <div className='min-h-[320px] w-full relative mt-5'>
-                <Table cols={cols} rows={isLoading ? [] : (filteredRows.length > 0 && lastRow ? filteredRows.concat(lastRow): filteredRows)} index={page* perPage} lastRow={true} />
+                <Table cols={cols} rows={isLoading ? [] : (filteredRows.length > 0 && lastRow ? filteredRows.concat(lastRow): filteredRows)} index={page* perPage} lastRow={lastRow ? true : false} />
                 {
                     isLoading && 
                         <div className='absolute w-full h-full'>

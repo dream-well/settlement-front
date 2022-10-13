@@ -1,14 +1,27 @@
+import { useState } from 'react'
 import Layout from "components/Layout"
 import TableCard from "components/Tables/TableCard"
 import moment from "moment";
 import useSWR from 'swr';
-import { truncateAddress } from "utils";
+import { DateRangePicker, SelectPicker } from 'rsuite'
+import { filterDateRange, truncateAddress } from "utils"
+
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Chargebacks() {
     const { data: info } = useSWR(`/api/systemstatus`, fetcher);
-    const { data: rows, error } = useSWR(`/api/transactions`, fetcher);
+    const { data: rows } = useSWR(`/api/transactions`, fetcher);
 
+    const [dateRange, setDateRange] = useState();
+    const filteredRows = rows ? 
+        filterDateRange(rows, "processed_at", dateRange)
+        .map(row => ({
+            ...row,
+            amount_to_merchant: (row.status == 2 || row.status == 4) ? 
+                row.amount - row.fee_amount - row.rolling_reserve_amount : 0
+        }))
+        : [];
+    
     const cols = [
         { text: 'DateTime', value: row => row.timestamp ? moment(row.timestamp * 1000).format('MM/DD/YYYY hh:mm:ss'): "" },
         { text: 'Function', value: 'func'},
@@ -18,7 +31,19 @@ export default function Chargebacks() {
 
     return (
         <Layout title=" ">
-            <TableCard title='Transactions' cols={cols} rows={rows} isLoading={rows ? false : true}/>
+            
+            <TableCard
+                title='Transactions'
+                cols={cols}
+                rows={filteredRows}
+                isLoading={filteredRows ? false : true}
+                className="w-full"
+            >
+                <div className='flex items-center'>
+                    <span className='mr-2'>Filter By Date:</span>
+                    <DateRangePicker value={dateRange} onChange={setDateRange}/>
+                </div>
+            </TableCard>
         </Layout>
     )
 }
