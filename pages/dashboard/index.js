@@ -1,16 +1,50 @@
 import Layout from "components/Layout"
-import Table from "components/Tables/Table"
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import useSWR from "swr";
-import { useEffect } from "react";
 import Box from 'components/Boxes/Box'
-import { BarLoader } from "react-spinners";
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { useState } from "react";
+import moment from "moment";
+import { SelectPicker } from 'rsuite'
+
+const fetcher = ({url, args}) => fetch(url + '?' + new URLSearchParams(args)).then((res) => res.json());
 
 export default function Settlements() {
-    const { data, error } = useSWR(`/api/dashboard`, fetcher);
+    
+    const [value, setValue] = useState(0);
+    const list = ['AllTime', 'Today', 'Yesterday', 'This Month'];
+
+    let from, to;
+    let date = moment((new Date).toDateString());
+
+    switch(value) {
+        case 0: break;
+        case 1: 
+            from = date;
+            break;
+        case 2:
+            from = date.subtract(1, 'day');
+            to = date;
+            break;
+        case 3:
+            from = date.set('date', 1);
+            break;
+    }
+    const args = {};
+    if(from) args.from = from.unix();
+    if(to) args.to = to.unix();
+
+    const { data, error } = useSWR({ url: `/api/dashboard`, args }, fetcher);
+
     return (
         <Layout title="DashBoard">
+            <div className='mb-4'>
+                <SelectPicker data={list.map((each, i) => ({label: each, value: i}))} 
+                    searchable={false} style={{ width: 140 }}  
+                    value={value}
+                    defaultValue={0}
+                    cleanable={false}
+                    onChange={setValue}
+                />
+            </div>  
             <div className='flex pb-4 flex-wrap justify-between'>
                 <Box className='mr-4 mb-6' title='Deposits' value={data?.deposits} src="/images/dashboard/deposit.svg" />
                 <Box className='mr-4 mb-6' title='Payouts' value={data?.cashouts} src="/images/dashboard/payout.svg" />

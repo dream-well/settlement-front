@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   let request;
   if(req.method === 'GET') {
     delete req.query.path;
-    request = axios.get(API + path.join("/"));
+    request = axios.get(API + path.join("/") + '?' + new URLSearchParams(req.query));
   } else {
     request = axios.post(API + path.join("/"), req.body);
   }
