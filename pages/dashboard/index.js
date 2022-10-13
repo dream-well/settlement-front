@@ -25,7 +25,7 @@ export default function Settlements() {
                 <div className='min-w-[200px] mr-4'></div>
                 <div className='min-w-[200px] mr-4'></div>
                 <div className='min-w-[200px] mr-4'></div>
-                <div className='min-w-[200px] mr-4'></div>
+                <div className='min-w-[200px] mr-4'></div>  
             </div>
         </Layout>
     )

@@ -34,30 +34,16 @@ function Auth({children}) {
     }, [library])
 
     useEffect(() => {
-        console.warn("auth error", error);
-
-        if(auth_pages[router.pathname]) {
-            if(!account) {
-                console.log("error", error);
-                if(localStorage.getItem('account')) {
-                    activate(metamask, (e) => {
-                        localStorage.removeItem('account');
-                        setPopupHidden(false);
-                    }).then(() => {
-                        if(account)
-                            localStorage.setItem('account', account);
-                    })
-                }
-                else {
-                    setPopupHidden(false);
-                }
-            }
-            else {
-                localStorage.setItem('account', account)
+        // console.warn("auth error", error);
+        metamask.getProvider().then(provider => {
+            if(provider && provider.selectedAddress) {
+                activate(metamask, async(error, data) => {
+                    console.error(error);
+                });
                 setPopupHidden(true);
             }
-        }
-    }, [account, error])
+        })
+    }, [router.pathname])
 
     return (
         <div>
