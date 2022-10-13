@@ -18,7 +18,7 @@ function Header() {
     return (
         <div className='w-full flex items-center justify-between bg-[#33414E] h-[60px] px-4'>
             <IconButton className='text-white' onClick={() => { dispatch(setMenuState(menuState == 'hidden' ? 'show' : 'hidden'))}}>
-                <Menu />
+                <Menu color="inherit" className='text-white'/>
             </IconButton>
             <Button variant="contained" className='h-[45px] bg-[#23B7E5] hover:bg-[#20A8D2] active:bg-[#0082AB]' onClick={() => { dispatch(setpopupSate(false)) }}>
                 {account ? truncateAddress(account, 3) : 'Connect Wallet' }
