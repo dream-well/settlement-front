@@ -2,7 +2,7 @@
 import cn from 'classnames'
 import { getCellText } from '../util'
 
-function Table( {cols, rows, className, index = 0} ) {
+function Table( {cols, rows, className, index = 0, lastRow=false} ) {
     return (
         <table className={cn('border-grey border-t border-b w-full', className)}>
             <thead>
@@ -26,12 +26,12 @@ function Table( {cols, rows, className, index = 0} ) {
             </thead>
             <tbody className='relative'>
                 {
-                    rows.map((row, key) => (
-                        <tr key={key} className='border-grey border-t'>
+                    rows.map((row, rowid) => (
+                        <tr key={rowid} className='border-grey border-t'>
                             {
                                 cols[0].type != 'id' &&
                                 <td className='text-left py-[12px] pl-[20px] pr-[4px]'>
-                                    {index + key + 1}
+                                    {(rowid == rows.length - 1 && lastRow) ? "" : index + rowid + 1}
                                 </td>
                             }
                             {

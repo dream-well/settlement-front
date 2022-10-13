@@ -8,11 +8,11 @@ import { getCellText } from '../util';
 import { renderToString } from 'react-dom/server';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
-function TableCard({ title, rows=[], cols=[], isLoading=false, combotype=false}) {
+function TableCard({ title, rows=[], cols=[], isLoading=false, children, lastRow}) {
     const [searchText, setSearchText] = useState('');
     let filteredRows = filterRows(cols, rows, searchText);
     const [page, setPage] = useState(0);
-    const [perPage, setPerPage] = useState(5);
+    const [perPage, setPerPage] = useState(10);
     const total = filteredRows.length;
     filteredRows = filteredRows.slice(page * perPage, (page * perPage) + perPage);
     const maxPage = Math.ceil(total / perPage);
@@ -22,35 +22,15 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, combotype=false})
     return (
         <div className='bg-white rounded-[12px] shadow pb-[10px] px-6'>
             <div className='flex'>
-                <div className='font-medium text-[22px] py-7 flex-grow'>
+                <div className='font-medium text-[22px] pt-7 pb-2 flex-grow'>
                     { title }
                 </div>
-                {
-                    combotype && 
-                    <div className='flex justify-center items-center'>
-                        <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">select</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={month}
-                                label="select"
-                                size="small"
-                                onChange={(e) => setmonth(e.target.value)}
-                            >
-                            <MenuItem value={1}>Current Month</MenuItem>
-                            <MenuItem value={2}>Today</MenuItem>
-                            <MenuItem value={3}>Yesterday</MenuItem>
-                            <MenuItem value={4}>August 2022</MenuItem>
-                            <MenuItem value={5}>July 2022</MenuItem>
-                            <MenuItem value={6}>une 2022</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </div>
-                }
             </div>
-            <div className='flex justify-between'>
-                <div className='flex'>
+            {
+                children
+            }
+            <div className='flex justify-between mt-5'>
+                <div className='flex items-center'>
                     show 
                     <select
                         className='ml-6 border h-[25px] pl-2' 
@@ -79,7 +59,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, combotype=false})
                 </div>
             </div>
             <div className='min-h-[320px] w-full relative mt-5'>
-                <Table cols={cols} rows={isLoading ? [] : filteredRows} index={page* perPage} />
+                <Table cols={cols} rows={isLoading ? [] : (filteredRows.length > 0 && lastRow ? filteredRows.concat(lastRow): filteredRows)} index={page* perPage} lastRow={true} />
                 {
                     isLoading && 
                         <div className='absolute w-full h-full'>
@@ -107,7 +87,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, combotype=false})
                         {total && <span className='mx-4'>Total: {total}</span> }
                         <div className='flex'>
                             <button onClick={onPrev}>Previous</button>
-                            <div className='w-[60px] outline-none border text-center px-2 mx-2'>                
+                            <div className='outline-none border text-center px-3 mx-2'>  
                                 {page + 1}
                             </div>
                             { maxPage > 0 && '/' }
