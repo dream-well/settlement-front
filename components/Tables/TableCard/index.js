@@ -20,7 +20,7 @@ function TableCard({ title, rows=[], cols=[], isLoading=false, children, lastRow
     const onNext=()=>{ setPage(Math.min(maxPage-1, page+1))};
 
     return (
-        <div className='bg-white rounded-[12px] shadow pb-[10px] px-6'>
+        <div className='bg-white rounded-[4px] shadow pb-[10px] px-6'>
             <div className='flex mb-2'>
                 <div className='font-medium text-[22px] pt-7 pb-2 flex-grow'>
                     { title }

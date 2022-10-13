@@ -15,7 +15,7 @@ function Layout({children, title}) {
             <Sidebar merchantStatus={!info?.merchantStatus == 1} />
             <div className='flex flex-col w-full bg-[#f5f6f8] '>
                 <Header />
-                <div className='flex-grow'>
+                <div className='flex-grow pb-4'>
                     <div className="min-h-full bg-[#F0F3F4]">
                         <div className="flex justify-between bg-[#F6F8F8] border-b border-[#DEE5E7] h-[64px] items-center pl-[27px] pr-[30px]">
                             <span className='text-[24px]'>{title}</span>

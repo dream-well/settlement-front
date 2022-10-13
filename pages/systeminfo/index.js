@@ -33,7 +33,7 @@ export default function SystemInfo() {
                     {
                         infos.map(({title, value}, key) => (
                             <div className='flex justify-between items-center px-[20px] h-[40px] border-b border-[#F3F4F8]' key={key}>
-                                <h1>{title}</h1>
+                                <span>{title}</span>
                                 { info != undefined ? 
                                     <span>{value}</span> :
                                     <BarLoader color='#1e2f65' width='100px' />
