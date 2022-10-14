@@ -25,7 +25,7 @@ export default function SystemInfo() {
     return (
         <Layout title="System Info">
             <div className='w-full flex'>
-                <div className='w-[480px] text-[12px] bg-white px-[32px] py-[30px] shadow-lg'>
+                <div className='w-[480px] bg-white px-[32px] py-[30px] shadow-lg'>
                     <div className='bg-[#F3F4F8] h-[44px] flex justify-between items-center px-[20px]'>
                         <span>#</span>
                         <span>Details</span>
