@@ -48,30 +48,28 @@ export default function Settlements() {
 
     return (
         <Layout title="DashBoard">
-            <div className='mb-4'>
-                <SelectPicker data={list.map((each, i) => ({label: each, value: i}))} 
-                    searchable={false} style={{ width: 140 }}  
-                    value={value}
-                    defaultValue={0}
-                    cleanable={false}
-                    onChange={setValue}
-                />
-            </div>  
-            <div className='flex pb-4 flex-wrap justify-between'>
-                <Box className='mr-4 mb-6' title='Deposits' value={data?.deposits} src="/images/dashboard/deposit.svg" />
-                <Box className='mr-4 mb-6' title='Payouts' value={data?.cashouts} src="/images/dashboard/payout.svg" />
-                <Box className='mr-4 mb-6' title='Settlement Pending' value={data?.settlements.pending} src="/images/dashboard/settlement_pending.svg" />
-                <Box className='mr-4 mb-6' title='Settlement Paid' value={data?.settlements.settled} src="/images/dashboard/settlement_paid.svg" />
-                <Box className='mr-4 mb-6' title='Total Rolling Reserve' value={data?.rollingReserve.total} src="/images/dashboard/reserve.svg" />
-                <Box className='mr-4 mb-6' title='Rolling Reserve Paid' value={data?.rollingReserve.released} src="/images/dashboard/reserve_paid.svg" />
-                <Box className='mr-4 mb-6' title='Total Chargeback' value={data?.totalChargeback} src="/images/dashboard/chargeback.svg" />
-                <Box className='mr-4 mb-6' title='Chargeback Paid' value={data?.totalChargebackPaid} src="/images/dashboard/chargeback_paid.svg" />
-                <div className='min-w-[200px] mr-4'></div>
-                <div className='min-w-[200px] mr-4'></div>
-                <div className='min-w-[200px] mr-4'></div>
-                <div className='min-w-[200px] mr-4'></div>
-                <div className='min-w-[200px] mr-4'></div>
-                <div className='min-w-[200px] mr-4'></div>  
+            <div className='p-[30px] bg-white rounded-[4px]'>
+                <div className='mb-4'>
+                    <SelectPicker data={list.map((each, i) => ({label: each, value: i}))} 
+                        searchable={false} style={{ width: 140 }}  
+                        value={value}
+                        defaultValue={0}
+                        cleanable={false}
+                        onChange={setValue}
+                    />
+                </div>  
+                <div className='flex justify-between space-x-2'>
+                    <Box title='Deposits' value={data?.deposits} src="/images/dashboard/deposit.svg" />
+                    <Box title='Payouts' value={data?.cashouts} src="/images/dashboard/payout.svg" />
+                    <Box title='Settlement Pending' value={data?.settlements.pending} src="/images/dashboard/settlement_pending.svg" />
+                    <Box title='Settlement Paid' value={data?.settlements.settled} src="/images/dashboard/settlement_paid.svg" />
+                </div>
+            </div>
+            <div className='p-[30px] bg-white rounded-[4px] flex justify-between space-x-2 mt-[30px]'>
+                <Box title='Total Rolling Reserve' value={data?.rollingReserve.total} src="/images/dashboard/reserve.svg" />
+                <Box title='Rolling Reserve Paid' value={data?.rollingReserve.released} src="/images/dashboard/reserve_paid.svg" />
+                <Box title='Total Chargeback' value={data?.totalChargeback} src="/images/dashboard/chargeback.svg" />
+                <Box title='Chargeback Paid' value={data?.totalChargebackPaid} src="/images/dashboard/chargeback_paid.svg" />
             </div>
         </Layout>
     )

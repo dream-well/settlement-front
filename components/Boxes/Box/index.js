@@ -3,7 +3,7 @@ import { PuffLoader } from 'react-spinners';
 
 function Box({title, value, className, src}) {
     return (
-        <div className={cn('min-w-[200px] h-[180px] flex flex-col bg-white items-center justify-center', className)}>
+        <div className={cn('border border-[#F0F3F4] min-w-[200px] h-[180px] flex flex-col bg-white items-center justify-center', className)}>
             <div className='w-[77px] h-[77px] bg-[#F6F8F8] rounded-full flex justify-center items-center'>
                 <img src={src} />
             </div>
