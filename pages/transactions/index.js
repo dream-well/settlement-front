@@ -20,7 +20,7 @@ export default function Chargebacks() {
             amount_to_merchant: (row.status == 2 || row.status == 4) ? 
                 row.amount - row.fee_amount - row.rolling_reserve_amount : 0
         }))
-        : [];
+        : undefined;
     
     const cols = [
         { text: 'DateTime', value: row => row.timestamp ? moment(row.timestamp * 1000).format('MM/DD/YYYY hh:mm:ss'): "" },

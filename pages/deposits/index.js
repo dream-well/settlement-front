@@ -29,15 +29,15 @@ export default function Deposits() {
             amount_to_merchant: (row.status == 2 || row.status == 4) ? 
                 row.amount - row.fee_amount - row.rolling_reserve_amount : 0
         }))
-        : [];
+        : undefined;
     
-    const lastRow = filteredRows.reduce((_, row) => ({
+    const lastRow = filteredRows ? filteredRows.reduce((_, row) => ({
         requestId: 'Total',
         amount: _.amount  + row.amount,
         fee_amount: _.fee_amount  + row.fee_amount,
         rolling_reserve_amount: _.rolling_reserve_amount  + row.rolling_reserve_amount,
         amount_to_merchant: _.amount_to_merchant + row.amount_to_merchant
-    }), {requestId: 'Total', amount: 0, fee_amount: 0, rolling_reserve_amount: 0, amount_to_merchant: 0})    
+    }), {requestId: 'Total', amount: 0, fee_amount: 0, rolling_reserve_amount: 0, amount_to_merchant: 0}) : undefined;
 
     return (
         <Layout title="Deposits">

@@ -23,12 +23,12 @@ export default function RollingReserve() {
             amount_to_merchant: (row.status == 2 || row.status == 4) ? 
                 row.amount - row.fee_amount - row.rolling_reserve_amount : 0
         }))
-        : [];
+        : undefined;
     
-    const lastRow = filteredRows.reduce((_, row) => ({
+    const lastRow = filteredRows ? filteredRows.reduce((_, row) => ({
         timestamp: 'Total',
         amount: _.amount  + row.amount,
-    }), {timestamp: 'Total', amount: 0})    
+    }), {timestamp: 'Total', amount: 0}) : undefined;
 
     return (
         <Layout title="Rolling Reserve">
