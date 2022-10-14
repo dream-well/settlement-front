@@ -31,7 +31,7 @@ export default function Sidebar({merchantStatus}) {
                         href == router.pathname ? 'text-white': 'text-[#869FB1]')}
                     >
                         <Link href={href}>
-                            <div className='px-[25px] flex justify-center py-[15px] cursor-pointer'>
+                            <div className='px-[25px] flex justify-center items-center py-[15px] cursor-pointer'>
                                 <i className='material-icons'>{icon}</i>
                                 <span className='ml-[4px]'>{text}</span>
                             </div>
