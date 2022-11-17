@@ -51,7 +51,7 @@ export default function Signature() {
         const hash = web3.utils.soliditySha3(
             {t: 'uint256', v: data[0].value},
             {t: 'bytes32', v: paramHash},
-            {t: 'uint256', v: data[1].value},
+            // {t: 'uint256', v: data[1].value},
           ).toString('hex');
         const signature = await web3.eth.sign(web3.eth.accounts.hashMessage(hash), account);
         setSignature(signature);
