@@ -1,10 +1,9 @@
 import Layout from "components/Layout"
 import useSWR from "swr";
 import Box from 'components/Boxes/Box'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import moment from "moment";
 import { SelectPicker } from 'rsuite'
-import { useEffect } from "react-virtualized/node_modules/@types/react";
 
 const fetcher = ({url, args}) => fetch(url + '?' + new URLSearchParams(args)).then((res) => res.json());
 
