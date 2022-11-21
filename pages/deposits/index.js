@@ -69,7 +69,7 @@ export default function Deposits() {
 
 const cols = [
     { text: 'Request ID', value: 'requestId', type: 'id' },
-    { text: 'Process Date', value: row => typeof row.processed_at == 'number' ? moment(row.processed_at * 1000).format('MM/DD/YYYY hh:mm:ss'): row.processed_at },
+    { text: 'Process Date', value: row => typeof row.processed_at == 'number' ? (row.processed_at ? moment(row.processed_at * 1000).format('MM/DD/YYYY hh:mm:ss') : ''): row.processed_at },
     { text: 'Customer ID', value: row => row.customerId ? truncateAddress("0x" + row.customerId, 3) : ''},
     { text: 'Total Amount', value: 'amount'},
     { text: 'Fees', value: 'fee_amount'},
