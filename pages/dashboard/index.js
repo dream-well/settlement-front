@@ -4,6 +4,7 @@ import Box from 'components/Boxes/Box'
 import { useState } from "react";
 import moment from "moment";
 import { SelectPicker } from 'rsuite'
+import { useEffect } from "react-virtualized/node_modules/@types/react";
 
 const fetcher = ({url, args}) => fetch(url + '?' + new URLSearchParams(args)).then((res) => res.json());
 
@@ -44,7 +45,16 @@ export default function Settlements() {
     if(from) args.from = from.unix();
     if(to) args.to = to.unix();
 
-    const { data, error } = useSWR({ url: `/api/dashboard`, args }, fetcher);
+    const { data, error, mutate } = useSWR({ url: `/api/dashboard`, args }, fetcher);
+
+    useEffect(() => {
+        const timerId = setInterval(() => {
+            mutate();
+        }, 5000);
+        return () => {
+            clearInterval(timerId);
+        }
+    })
 
     return (
         <Layout title="DashBoard">
