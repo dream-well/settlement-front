@@ -21,7 +21,7 @@ function Layout({children, title}) {
                             <span className='text-[24px]'>{title}</span>
                             <div className="flex items-center text-[12px]">
                                 <span className="font-medium pr-1">Maintenance Mode:</span>
-                                <span className={cn("text-white px-[7px] rounded-[3px]", info?.maintenanceMode == 1 ? 'bg-[#27C24C]' : 'bg-[#F05050]')}>
+                                <span className={cn("text-white px-[7px] rounded-[3px]", info?.maintenanceMode == 0 ? 'bg-[#27C24C]' : 'bg-[#F05050]')}>
                                     {info?.maintenanceMode == 1 ? "Yes" : "No"}
                                 </span>
                             </div>
