@@ -9,7 +9,7 @@ function Box({title, value, className, src}) {
             </div>
             <div className='text-[12px] text-[#869FB1] uppercase pt-[24px] text-center px-[16px]'>{title}</div>
             <div className='text-[24px] font-medium'>
-                {value}
+                {typeof value == 'number' ? value.toLocaleString() : value}
                 {
                     value == null && 
                     <PuffLoader color='grey' size={36} />
