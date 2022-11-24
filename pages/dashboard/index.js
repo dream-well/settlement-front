@@ -43,7 +43,7 @@ export default function Dashboard() {
     if(from) args.from = from.unix();
     if(to) args.to = to.unix();
 
-    const { data, error, mutate } = useSWR(`/api/dashboard` + new URLSearchParams(args), fetcher);
+    const { data, error, mutate } = useSWR(`/api/dashboard?` + new URLSearchParams(args), fetcher);
     useEffect(() => {
         const timerId = setInterval(() => {
             mutate();

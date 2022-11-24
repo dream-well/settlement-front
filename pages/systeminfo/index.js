@@ -2,8 +2,7 @@ import Layout from "components/Layout"
 
 import { BarLoader } from 'react-spinners';
 import useSWR from "swr";
-import { truncateAddress } from "utils";
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { fetcher, truncateAddress } from "utils";
 
 export default function SystemInfo() {
 
