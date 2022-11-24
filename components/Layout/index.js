@@ -5,8 +5,7 @@ import { useSelector } from "react-redux";
 import { selectmaintenanceState } from "store/slices/maintenanceSlice";
 import useSWR from 'swr';
 import cn from 'classnames';
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { fetcher } from "utils";
 
 function Layout({children, title}) {
     const { data: info } = useSWR(`/api/systemstatus`, fetcher);

@@ -5,8 +5,7 @@ import moment from "moment";
 import useSWR from 'swr';
 import { DateRangePicker, SelectPicker } from 'rsuite'
 import { filterDateRange, truncateAddress } from "utils"
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { fetcher } from "utils";
 
 export default function Chargebacks() {
     const { data: info } = useSWR(`/api/systemstatus`, fetcher);

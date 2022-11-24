@@ -7,8 +7,7 @@ import useSWR from 'swr';
 import { DateRangePicker, SelectPicker } from 'rsuite'
 import { filterDateRange, truncateAddress } from "utils"
 import Box from 'components/Boxes/Box'
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { fetcher } from "utils";
 
 
 export default function RollingReserve() {

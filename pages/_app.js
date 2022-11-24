@@ -15,6 +15,7 @@ import { Provider } from 'react-redux';
 import { Web3ReactProvider } from '@web3-react/core'
 import { ethers } from "ethers";
 import 'rsuite/dist/rsuite.min.css';
+import axios from 'axios';
 
 export default function MyApp({ Component, pageProps }) {
   return (

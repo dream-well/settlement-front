@@ -10,8 +10,7 @@ import { filterDateRange, truncateAddress } from "utils"
 import { DateRangePicker, Input } from 'rsuite'
 import { SelectPicker } from 'rsuite'
 import { useState } from 'react'
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { fetcher } from "utils";
 
 
 export default function Deposits() {

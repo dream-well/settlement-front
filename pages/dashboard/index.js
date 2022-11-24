@@ -4,10 +4,9 @@ import Box from 'components/Boxes/Box'
 import { useState, useEffect } from "react";
 import moment from "moment";
 import { SelectPicker } from 'rsuite'
+import { fetcher } from "utils";
 
-const fetcher = ({url, args}) => fetch(url + '?' + new URLSearchParams(args)).then((res) => res.json());
-
-export default function Settlements() {
+export default function Dashboard() {
     
     let from, to;
     let date = moment((new Date).toDateString());
@@ -44,8 +43,7 @@ export default function Settlements() {
     if(from) args.from = from.unix();
     if(to) args.to = to.unix();
 
-    const { data, error, mutate } = useSWR({ url: `/api/dashboard`, args }, fetcher);
-
+    const { data, error, mutate } = useSWR(`/api/dashboard` + new URLSearchParams(args), fetcher);
     useEffect(() => {
         const timerId = setInterval(() => {
             mutate();
@@ -53,11 +51,11 @@ export default function Settlements() {
         return () => {
             clearInterval(timerId);
         }
-    })
+    }, [])
 
     return (
         <Layout title="DashBoard">
-            <div className='p-[30px] bg-white rounded-[4px]'>
+            <div className='p-[30px] bg-white rounded-[4px] shadow-sm'>
                 <div className='mb-4'>
                     <SelectPicker data={list.map((each, i) => ({label: each, value: i}))} 
                         searchable={false} style={{ width: 140 }}  
@@ -74,7 +72,7 @@ export default function Settlements() {
                     <Box title='Settlement Paid' value={data?.settlements.settled} src="/images/dashboard/settlement_paid.svg" />
                 </div>
             </div>
-            <div className='p-[30px] bg-white rounded-[4px] flex justify-between space-x-2 mt-[30px]'>
+            <div className='p-[30px] bg-white rounded-[4px] flex justify-between space-x-2 mt-[30px] shadow-sm'>
                 <Box title='Total Rolling Reserve' value={data?.rollingReserve.total} src="/images/dashboard/reserve.svg" />
                 <Box title='Rolling Reserve Paid' value={data?.rollingReserve.released} src="/images/dashboard/reserve_paid.svg" />
                 <Box title='Total Chargeback' value={data?.totalChargeback} src="/images/dashboard/chargeback.svg" />
