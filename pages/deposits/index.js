@@ -6,11 +6,12 @@ import Image from "next/image"
 import moment from "moment"
 import Chip from 'components/Chips/Chip'
 import useSWR from 'swr'
-import { filterDateRange, truncateAddress } from "utils"
+import { filterDateRange, truncate, truncateAddress } from "utils"
 import { DateRangePicker, Input } from 'rsuite'
 import { SelectPicker } from 'rsuite'
 import { useState } from 'react'
 import { fetcher } from "utils";
+import CopyText from "components/CopyText"
 
 
 export default function Deposits() {
@@ -69,7 +70,9 @@ export default function Deposits() {
 const cols = [
     { text: 'Request ID', value: 'requestId', type: 'id' },
     { text: 'Process Date', value: row => typeof row.processed_at == 'number' ? (row.processed_at ? moment(row.processed_at * 1000).format('MM/DD/YYYY hh:mm:ss') : ''): row.processed_at },
-    { text: 'Customer ID', value: row => row.customerId ? truncateAddress("0x" + row.customerId, 3) : ''},
+    { text: 'Customer ID', value: row => row.customerId && 
+        <CopyText label={truncate(row.customerId, 3)} text={row.customerId} />
+    }, 
     { text: 'Total Amount', value: 'amount'},
     { text: 'Fees', value: 'fee_amount'},
     { text: 'Rolling Reserve', value: 'rolling_reserve_amount'},

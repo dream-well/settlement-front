@@ -5,8 +5,9 @@ import moment from "moment";
 import Chip from 'components/Chips/Chip'
 import useSWR from 'swr';
 import { DateRangePicker, SelectPicker } from 'rsuite'
-import { filterDateRange, truncateAddress } from "utils"
+import { filterDateRange, truncate } from "utils"
 import { fetcher } from "utils";
+import CopyText from 'components/CopyText';
 
 
 export default function Payouts() {
@@ -61,10 +62,14 @@ export default function Payouts() {
 const cols = [
     { text: 'Request ID', value: 'requestId', type: 'id' },
     { text: 'Process Date', value: row => row.processed_at ? moment(row.processed_at * 1000).format('MM/DD/YYYY hh:mm:ss'): "" },
-    { text: 'Customer ID', value: row => row.customerId && truncateAddress("0x" + row.customerId, 3)},
+    { text: 'Customer ID', value: row => row.customerId && 
+        <CopyText label={truncate(row.customerId, 3)} text={row.customerId} />
+    },
     { text: 'Total Amount', value: 'amount'},
     { text: 'Fees', value: 'fee_amount'},
-    { text: 'Account Info', value: row => row.accountInfo && truncateAddress("0x" + row.accountInfo, 3)},
+    { text: 'Account Info', value: row => row.accountInfo && 
+        <CopyText label={truncate(row.accountInfo, 3, 8)} text={row.accountInfo} />
+    },
     { text: 'remark', value: 'remark'},
     { text: 'Status', value: row => 
         row.status &&
