@@ -28,7 +28,7 @@ export default function Settlements() {
     const cols = [
         { text: 'Settlement ID', value: row => row['params']['settlement_id'] },
         { text: 'Event', value: 'name' },
-        { text: 'Private account', value: row => row['params']['account'] },
+        { text: 'Private account', value: row => truncateAddress(row['params']['account'])},
         { text: 'BSC account', value: row => row['params']['bsc_address'] },
         { text: 'Amount', value: row => Web3.utils.fromWei(row['params']['amount']) },
         { text: 'Process Date', value: row => moment(row.timestamp * 1000).format('MM/DD/YYYY hh:mm:ss')},
