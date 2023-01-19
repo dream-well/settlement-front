@@ -74,39 +74,18 @@ async function waitForUnlockAccount(sender) {
     }
 }
 
-function lockAccount(sender) {
-    accountLocked[sender] = true;
-}
-
-function unlockAccount(sender) {
-    accountLocked[sender] = false;
-}
-
 export async function _runMethod(method, options, web3) {
-    const sender = options.from.toLowerCase();
-    await waitForUnlockAccount(sender);
-    lockAccount(sender);
     try {
         const gas = await estimateGas(method, options);
-        const allTxCount = await web3.eth.getTransactionCount(sender, "pending");
-        let nonce = allTxCount;
-        console.log({nonce: allTxCount});
    
-        const tx = method.send({ ...options, gas, nonce });
+        const tx = method.send({ ...options, gas});
        
         tx.on('transactionHash', (txHash) => {
             console.log(txHash);
             // unlockAccount(sender);
         })
-        // .on('error', (event) => {
-        //     unlockAccount(sender);
-        // })
-        unlockAccount(sender);
-        // tx.on('rec')
-        // console.log(tx);
         return tx;
     } catch(e) {
-        unlockAccount(sender);
         throw e;
     }
 }

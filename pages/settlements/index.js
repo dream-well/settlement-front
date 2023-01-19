@@ -32,11 +32,18 @@ export default function Settlements() {
         { text: 'BSC account', value: row => row['params']['bsc_address'] },
         { text: 'Amount', value: row => Web3.utils.fromWei(row['params']['amount']) },
         { text: 'Process Date', value: row => moment(row.timestamp * 1000).format('MM/DD/YYYY hh:mm:ss')},
+        { text: 'Status', value: row => 
+            row.status &&
+            <div>
+                <Chip label={row.status} color={colors[row.status]} />
+            </div>
+        },   
         { text: '', value: row => (
             <div>
-                <Button onClick={() => make_settlement(row, library, account)}>Settle</Button>
+                <Button disabled={row.status == 'Processed'} className={row.status == 'Processed' && '!bg-gray-400 !border-gray-400'} onClick={() => make_settlement(row, library, account)}>Settle</Button>
             </div>
-        )}
+        )},
+        
     ]
 
     return (
@@ -70,36 +77,43 @@ async function make_settlement(row, library, account) {
     console.log(account);
     const event = row['params'];
     const bsc_admin = new web3.eth.Contract(bsc_admin_abi, bsc_admin_address);
-    if(row.name == 'Make_Settlement') {
-        if(row.amount == '0') return;
-        try{ 
+    if(event.amount == '0') return;
+    try{ 
+        if(row.name == 'Make_Settlement') {
             await _runMethod(bsc_admin.methods.auto_settlement_transfer(event.bsc_address, event.amount, event.settlement_id, row.txHash), {
                 from: account
             }, web3);
             console.log('Make_Settlement in BSC', event.bsc_address)
-        } catch (e) {
-            console.log("error", e.message); 
-            if(e.message.startsWith("Internal JSON-RPC error.")) {
-                if(e.message.length == 24) return "Internal JSON-RPC error";
-                e = JSON.parse(e.message.substr(24));
-                toast(e.message);
-            }
-            if(e.message.startsWith("execution reverted: ")) {
-                toast(e.message.substr(20))
-            }
         }
+        else if (row.name == 'Make_Settlement_For_Merchant') {
+            await _runMethod(bsc_admin.methods.auto_settlement_transfer(event.bsc_benefeciary_wallet, event.amount, event.settlement_id, row.txHash), {
+                from: account
+            }, web3);
+        }
+    } catch (e) {
+        console.log("error", e.message); 
+        let message = e.message;
+        if(e.message.startsWith("Internal JSON-RPC error.")) {
+            if(e.message.length == 24) return "Internal JSON-RPC error";
+            e = JSON.parse(e.message.substr(24));
+            message = e.message;
+        }
+        if(e.message.startsWith("execution reverted: ")) {
+            message = e.message.substr(20);
+        }
+        toast.error(message);
     }
-    // else if (row.name == 'Make_Settlement_For_Merchant') {
-    //     if(row.amount == '0') return;
-    //     const { benefeciary_wallet } = await admin.methods.get_merchant(row.returnValues.account).call();
-    //     const bsc_benefeciary_wallet = await admin.methods.bsc_addresses(benefeciary_wallet).call();
-    //     console.log('Make_Settlement_For_Merchant', row.returnValues.account, bsc_benefeciary_wallet, row.amount, settlement_id, row.transactionHash, account);
-    //     try{ 
-    //         await _runMethod(bsc_admin.methods.auto_settlement_transfer(bsc_benefeciary_wallet, row.amount, settlement_id, row.transactionHash), {
-    //             from: account
-    //         }, web3);
-    //     } catch (e) {
-    //         console.log(e.message);
-    //     }
-    // }
+}
+
+const statusList = [
+    "Init", "Processed"
+]
+
+const colors = {
+    Processed: "#97cc50",
+    Init: "#f1871b",
+    Expired: "#ea566b",
+    Chargebacked: "#4898ff",
+    "Refunded / Rejected": "#ea566b",
+    CriticalError: "#ea566b"
 }
