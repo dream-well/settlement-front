@@ -16,6 +16,8 @@ import { Web3ReactProvider } from '@web3-react/core'
 import { ethers } from "ethers";
 import 'rsuite/dist/rsuite.min.css';
 import axios from 'axios';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function MyApp({ Component, pageProps }) {
   return (
@@ -26,6 +28,7 @@ export default function MyApp({ Component, pageProps }) {
         <Auth>
           <ApolloProvider client={client}>
             <Component {...pageProps} />
+            <ToastContainer />
           </ApolloProvider>
         </Auth>
       </Web3ReactProvider>

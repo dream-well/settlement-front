@@ -51,39 +51,24 @@ const menu = [
     //     href: '/signature',
     //     icon: 'assignment'
     // },
-    {
-        text: 'Dashboard',
-        href: '/dashboard',
-        icon: 'groups'
-    },
-    {
-        text: 'Deposits',
-        href: '/deposits',
-        icon: 'money'
-    },
-    {
-        text: 'Payouts',
-        href: '/payouts',
-        icon: 'contacts'
-    },
+    // {
+    //     text: 'Dashboard',
+    //     href: '/dashboard',
+    //     icon: 'groups'
+    // },
     {
         text: 'Settlements',
         href: '/settlements',
         icon: 'payments'
     },
     {
-        text: 'Rolling Reserve',
-        href: '/rollingreserve',
+        text: 'Exchange',
+        href: '/exchange',
         icon: 'account_balance'
     },
-    {
-        text: 'Transactions',
-        href: '/transactions',
-        icon: 'calendar_today'
-    },
-    {
-        text: 'System Info',
-        href: '/systeminfo',
-        icon: 'info'
-    },   
+    // {
+    //     text: 'System Info',
+    //     href: '/systeminfo',
+    //     icon: 'info'
+    // },   
 ]

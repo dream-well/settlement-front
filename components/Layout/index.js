@@ -8,7 +8,8 @@ import cn from 'classnames';
 import { fetcher } from "utils";
 
 function Layout({children, title}) {
-    const { data: info } = useSWR(`/api/systemstatus`, fetcher);
+    // const { data: info } = useSWR(`/api/systemstatus`, fetcher);
+    const info = {};
     return (
         <div className='flex min-h-screen w-full'>
             <Sidebar merchantStatus={!info?.merchantStatus == 1} />
@@ -17,7 +18,7 @@ function Layout({children, title}) {
                 <div className='flex-grow pb-4'>
                     <div className="min-h-full bg-[#F0F3F4]">
                         <div className="flex justify-between bg-[#F6F8F8] border-b border-[#DEE5E7] h-[64px] items-center pl-[27px] pr-[30px]">
-                            <span className='text-[24px]'>{title}</span>
+                            <span className='text-[20px]'>{title}</span>
                             <div className="flex items-center text-[12px]">
                                 <span className="font-medium pr-1">Maintenance Mode:</span>
                                 <span className={cn("text-white px-[7px] rounded-[3px]", info?.maintenanceMode == 0 ? 'bg-[#27C24C]' : 'bg-[#F05050]')}>

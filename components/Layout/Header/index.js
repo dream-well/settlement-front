@@ -26,15 +26,15 @@ function Header() {
             <IconButton className='text-white' onClick={() => { dispatch(setMenuState(menuState == 'hidden' ? 'show' : 'hidden'))}}>
                 <Menu color="inherit" className='text-white'/>
             </IconButton>
+            <div className='flex-grow'></div>
             {
-                router.pathname == '/signature' && 
                 <Button variant="contained" className='h-[45px] bg-[#23B7E5] hover:bg-[#20A8D2] active:bg-[#0082AB]' onClick={() => { dispatch(setpopupSate(false)) }}>
                     {account ? truncateAddress(account, 3) : 'Connect Wallet' }
                 </Button>
             }
-            <Button variant="contained" className='ml-4 h-[45px] bg-[#23B7E5] hover:bg-[#20A8D2] active:bg-[#0082AB]' onClick={() => { logout(); }}>
-                {account ? truncateAddress(account, 3) : 'Logout' }
-            </Button>
+            {/* <Button variant="contained" className='!ml-4 h-[45px] bg-[red] hover:bg-red-500 active:bg-red-300' onClick={() => { logout(); }}>
+                {'Logout' }
+            </Button> */}
             <WalletPopup hidden={popupState} onClose={() => { dispatch(setpopupSate(true)) }}/>
         </div>
     )

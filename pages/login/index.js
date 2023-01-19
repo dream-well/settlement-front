@@ -1,7 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { ADMIN_LOGIN } from "../../graphql/mutations";
 import axios from 'axios';
 
 export default function Home() {
